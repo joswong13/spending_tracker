@@ -22,7 +22,3 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] removed unused classes/files
 - [ ] add version/version_two screenshots
 - [ ] add a way to click into each category
-
-## Note
-
-Future improvements to this app will NOT be merged to [version_one](https://github.com/joswong13/spending_tracker/tree/version/version_one) branch.
