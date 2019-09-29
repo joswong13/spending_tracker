@@ -43,8 +43,9 @@ class MonthlyTableView extends StatelessWidget {
             children: monthData.monthlyDataTable.map((week) {
               return TableRow(children: [
                 Card(
+                  elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(18),
                   ),
                   child: InkWell(
                     onTap: () async {

@@ -22,7 +22,7 @@ class MonthlyChartBar extends StatelessWidget {
                 color: Colors.transparent,
                 border: Border.all(color: greenLightGreenishBlue(), width: 3),
                 //color: barBgColor(),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
             FractionallySizedBox(
@@ -30,7 +30,7 @@ class MonthlyChartBar extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                   color: greenLightGreenishBlue(),
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
             ),

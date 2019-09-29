@@ -10,7 +10,10 @@ class Chart extends StatelessWidget {
     final List<Map<String, dynamic>> _test = monthData.currentWeek;
 
     return Card(
-      elevation: 6,
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
       margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
       child: Container(
         padding: EdgeInsets.all(10),
@@ -22,7 +25,7 @@ class Chart extends StatelessWidget {
             return Flexible(
               flex: 1,
               fit: FlexFit.tight,
-              child: ChartBar(data["weekdayShort"], dateString, data["dailyTotal"], data["percWeeklySpending"]),
+              child: ChartBar(data["weekdayShort"], dateString, data["percWeeklySpending"]),
             );
           }).toList(),
         ),

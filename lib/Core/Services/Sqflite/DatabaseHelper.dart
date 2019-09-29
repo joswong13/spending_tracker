@@ -89,4 +89,13 @@ class DataBaseHelper {
 
     return await db.query('userTransaction', where: "date >= ? AND date <= ?", whereArgs: [startOfMonth, endOfMonth]);
   }
+
+  /// Gets all transactions from a particular category and date.
+  Future<List<Map<String, dynamic>>> getCategoryList(int startOfMonth, int endOfMonth, String category) async {
+    print("[DatabaseHelper] - getCategoryList");
+    final Database db = await database;
+
+    return await db.query('userTransaction',
+        where: "date >= ? AND date <= ? AND category = ?", whereArgs: [startOfMonth, endOfMonth, category]);
+  }
 }

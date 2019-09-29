@@ -12,6 +12,10 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
       margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
       child: Column(
         children: <Widget>[

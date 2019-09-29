@@ -1,4 +1,6 @@
+import 'package:first_flutter/Core/ViewModels/MonthProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../Views/CategoryTransactionView/CategoryTransactionView.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -11,16 +13,19 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final monthData = Provider.of<MonthProvider>(context);
+
     return Expanded(
       child: InkWell(
         onTap: () {
-          print("TAPPED");
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) {
-              return CategoryTransactionView(_category);
-            }),
-          );
+          monthData.getListOfCategoryTransactions(_category).then((resp) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) {
+                return CategoryTransactionView(resp, _category);
+              }),
+            );
+          });
         },
         child: Container(
           margin: EdgeInsets.all(5),
