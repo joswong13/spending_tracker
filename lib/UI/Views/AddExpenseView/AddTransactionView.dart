@@ -184,6 +184,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                           _category,
                           style: TextStyle(color: Colors.black),
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                        ),
                         onPressed: () {
                           categoryDialog(context).then((String resp) {
                             _setCategoryState(resp);
@@ -212,6 +217,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                           'Choose Date',
                           style: TextStyle(color: Colors.black),
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                        ),
                         onPressed: () {
                           presentDatePicker(context, _selectedDate).then((DateTime resp) {
                             setState(() {
@@ -223,50 +233,48 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     ],
                   ),
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Submit Transaction',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    bool checkValue = _checkValidFields();
-                    if (checkValue) {
-                      monthData
-                          .insertUserTransaction(_trimText(nameController.text), double.parse(amountController.text),
-                              _trimText(descController.text), _selectedDate, _category)
-                          .then((resp) {
-                        _afterSubmit();
-                      });
-                    }
-                  },
-                ),
-                _transactionAdded
-                    ? RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          'Done',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () async {
-                          await monthData.refreshTransactions();
-                          Navigator.pop(context);
-                        },
-                      )
-                    : RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () async {
-                          Navigator.pop(context);
-                        },
-                      ),
                 _errorMessage()
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            FloatingActionButton.extended(
+              heroTag: "backButton",
+              icon: Icon(Icons.arrow_back),
+              label: _transactionAdded ? Text("Done") : Text("Back"),
+              onPressed: () async {
+                if (_transactionAdded) {
+                  await monthData.refreshTransactions();
+                  Navigator.pop(context);
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            FloatingActionButton.extended(
+              heroTag: "addButton",
+              icon: Icon(Icons.add_circle_outline),
+              label: Text("Add"),
+              onPressed: () {
+                bool checkValue = _checkValidFields();
+                if (checkValue) {
+                  monthData
+                      .insertUserTransaction(_trimText(nameController.text), double.parse(amountController.text),
+                          _trimText(descController.text), _selectedDate, _category)
+                      .then((resp) {
+                    _afterSubmit();
+                  });
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

@@ -187,6 +187,11 @@ class _TransactionScreenState extends State<EditScreen> {
                           _category,
                           style: TextStyle(color: Colors.black),
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                        ),
                         onPressed: () {
                           categoryDialog(context).then((String resp) {
                             _setCategoryState(resp);
@@ -215,6 +220,11 @@ class _TransactionScreenState extends State<EditScreen> {
                           'Choose Date',
                           style: TextStyle(color: Colors.black),
                         ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
+                        ),
                         onPressed: () {
                           presentDatePicker(context, _selectedDate).then((DateTime resp) {
                             setState(() {
@@ -226,61 +236,59 @@ class _TransactionScreenState extends State<EditScreen> {
                     ],
                   ),
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Submit Transaction',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    bool checkValue = _checkValidFields();
-                    if (checkValue) {
-                      monthData
-                          .updateUserTransaction(
-                              widget.id,
-                              _trimText(nameController.text),
-                              double.parse(amountController.text),
-                              _trimText(descController.text),
-                              _selectedDate,
-                              _category)
-                          .then((resp) async {
-                        if (resp == 1) {
-                          await monthData.refreshTransactions();
-                          Navigator.pop(context);
-                        }
-                      });
-                    }
-                  },
-                ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Delete',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    monthData.deleteUserTransaction(widget.id).then((resp) async {
-                      if (resp == 1) {
-                        await monthData.refreshTransactions();
-                        Navigator.pop(context);
-                      }
-                    });
-                  },
-                ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
                 _errorMessage()
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            FloatingActionButton.extended(
+              heroTag: "backButton",
+              icon: Icon(Icons.arrow_back),
+              label: Text("Back"),
+              onPressed: () async {
+                Navigator.pop(context);
+              },
+            ),
+            FloatingActionButton.extended(
+              heroTag: "deleteButton",
+              icon: Icon(Icons.delete),
+              label: Text("Delete"),
+              onPressed: () async {
+                monthData.deleteUserTransaction(widget.id).then((resp) async {
+                  if (resp == 1) {
+                    await monthData.refreshTransactions();
+                    Navigator.pop(context);
+                  }
+                });
+              },
+            ),
+            FloatingActionButton.extended(
+              heroTag: "editButton",
+              icon: Icon(Icons.edit),
+              label: Text("Edit"),
+              onPressed: () {
+                bool checkValue = _checkValidFields();
+                if (checkValue) {
+                  monthData
+                      .updateUserTransaction(widget.id, _trimText(nameController.text),
+                          double.parse(amountController.text), _trimText(descController.text), _selectedDate, _category)
+                      .then((resp) async {
+                    if (resp == 1) {
+                      await monthData.refreshTransactions();
+                      Navigator.pop(context);
+                    }
+                  });
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

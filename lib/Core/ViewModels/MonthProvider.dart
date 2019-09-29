@@ -154,13 +154,14 @@ class MonthProvider with ChangeNotifier {
 
   ///Resets the current date in Provider to today.
   Future<List<UserTransaction>> getListOfCategoryTransactions(String category) async {
+    _setBusy(true);
     List<UserTransaction> tempList = [];
-    await getCategoryList(category).then((resp) {
+    await _getCategoryList(category).then((resp) {
       for (int i = 0; i < resp.length; i++) {
         tempList.add(UserTransaction.fromDb(resp[i]));
-        print(i);
       }
     });
+    _setBusy(false);
     return tempList;
   }
 
@@ -202,7 +203,7 @@ class MonthProvider with ChangeNotifier {
   }
 
   ///Gets all the user transaction.
-  Future<List<Map<String, dynamic>>> getCategoryList(String category) async {
+  Future<List<Map<String, dynamic>>> _getCategoryList(String category) async {
     int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
     int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
 

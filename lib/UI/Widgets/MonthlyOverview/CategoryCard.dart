@@ -22,7 +22,7 @@ class CategoryCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) {
-                return CategoryTransactionView(resp, _category);
+                return CategoryTransactionView(resp, _category, _amount);
               }),
             );
           });
@@ -45,7 +45,7 @@ class CategoryCard extends StatelessWidget {
                 style: TextStyle(fontSize: 24),
               ),
               Text(
-                _amount.toString(),
+                "\$" + _amount.toString(),
                 style: TextStyle(fontSize: 24),
               ),
             ],
