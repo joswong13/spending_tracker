@@ -10,6 +10,8 @@ class MonthProvider with ChangeNotifier {
   Month _month;
   bool _busy = false;
   DataBaseHelper databaseHelper = DataBaseHelper();
+  String _categoryType = '';
+  List<UserTransaction> _categoryUserTransactionList = [];
 
   ///Generate initial calendar and query from database.
   MonthProvider() {
@@ -67,6 +69,11 @@ class MonthProvider with ChangeNotifier {
     }
   }
 
+  //----------------------------------------------Setters-----------------------------------------
+  set categoryType(String category) {
+    _categoryType = category;
+  }
+
   //----------------------------------------------Getters-----------------------------------------
 
   ///Get the date currently selected.
@@ -109,12 +116,15 @@ class MonthProvider with ChangeNotifier {
     return _monthlyDataTable.monthlyCategoryTotals;
   }
 
+  List<UserTransaction> get categoryUserTransactionList {
+    return _categoryUserTransactionList;
+  }
+
   //----------------------------------------------External Functions-----------------------------------------
 
   ///Changes the current date in Provider to the one selected.
   Future<void> changeDate(DateTime date) async {
     await _changeDateAndQuery(date);
-    //notifyListeners();
   }
 
   ///Resets the current date in Provider to today.
@@ -138,6 +148,10 @@ class MonthProvider with ChangeNotifier {
       "month": _month.date.month
     };
 
+    if (_categoryType != "") {
+      getListOfCategoryTransactions();
+    }
+
     await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
       _monthlyDataTable = resp;
       _setBusy(false);
@@ -152,17 +166,18 @@ class MonthProvider with ChangeNotifier {
     _setBusy(false);
   }
 
-  ///Resets the current date in Provider to today.
-  Future<List<UserTransaction>> getListOfCategoryTransactions(String category) async {
+  ///Using the categoryType in the MonthProvider object, does a SQL search. Then converts each transaction to a UserTransaction object.
+  Future<void> getListOfCategoryTransactions() async {
     _setBusy(true);
-    List<UserTransaction> tempList = [];
-    await _getCategoryList(category).then((resp) {
+    _categoryUserTransactionList.clear();
+
+    await _getCategoryList(_categoryType).then((resp) {
       for (int i = 0; i < resp.length; i++) {
-        tempList.add(UserTransaction.fromDb(resp[i]));
+        _categoryUserTransactionList.add(UserTransaction.fromDb(resp[i]));
       }
     });
+
     _setBusy(false);
-    return tempList;
   }
 
   //----------------------------------------------SQFLite Core Functions-----------------------------------------
@@ -198,11 +213,12 @@ class MonthProvider with ChangeNotifier {
   }
 
   ///Gets all the user transaction.
+  ///Not used in any of the widgets.
   Future<List<Map<String, dynamic>>> getAllUserTransaction() async {
     return await databaseHelper.getAllUserTransactionList();
   }
 
-  ///Gets all the user transaction.
+  ///Private function that gets all the user transaction.
   Future<List<Map<String, dynamic>>> _getCategoryList(String category) async {
     int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
     int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;

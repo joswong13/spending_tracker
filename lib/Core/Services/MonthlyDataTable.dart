@@ -28,7 +28,7 @@ class MonthlyDataTable {
     //init category map
     _initMonthlyCategoryTotalsMap();
 
-    //txMap contains the transactionss list from the database converted to a map
+    //txMap contains the transactions list from the database converted to a map
     Map<DateTime, dynamic> txMap = _createTransactionsMapFromList(tx);
 
     //New return table to build the calendar.
@@ -75,7 +75,8 @@ class MonthlyDataTable {
       for (int m = 0; m < weeklyArray.length; m++) {
         if (weeklyTotal != 0.0) {
           double percWeeklySpending = weeklyArray[m]["dailyTotal"] / weeklyTotal;
-          weeklyArray[m]["weeklyTotal"] = weeklyTotal;
+          double weeklyTotalAmount = double.parse(weeklyTotal.toStringAsFixed(2));
+          weeklyArray[m]["weeklyTotal"] = weeklyTotalAmount;
           weeklyArray[m]["percWeeklySpending"] = double.parse(percWeeklySpending.toStringAsFixed(4));
         }
       }
@@ -108,6 +109,7 @@ class MonthlyDataTable {
     //Big O = (O(n))
     for (int n = 0; n < tx.length; n++) {
       DateTime tempTxDate = DateTime.fromMillisecondsSinceEpoch(tx[n]["date"], isUtc: true);
+
       sixWeekTotal = sixWeekTotal + tx[n]["amount"];
       _addMonthlyCategoryTotals(tx[n]["category"], tx[n]["amount"]);
 
@@ -115,7 +117,9 @@ class MonthlyDataTable {
         listOfDailyTx.add(UserTransaction.fromDb(tx[n]));
         dailyTotal = dailyTotal + tx[n]["amount"];
       } else {
-        Map<String, dynamic> dailyMap = {"transactions": listOfDailyTx, "dailyTotal": dailyTotal};
+        //ensure the double is 2 decimal places
+        double dailyTotalAmount = double.parse(dailyTotal.toStringAsFixed(2));
+        Map<String, dynamic> dailyMap = {"transactions": listOfDailyTx, "dailyTotal": dailyTotalAmount};
         txMap[currentTxDate] = dailyMap;
 
         currentTxDate = tempTxDate;
@@ -129,7 +133,8 @@ class MonthlyDataTable {
     }
 
     //Add one last time after iterating through the list
-    Map<String, dynamic> dailyMap = {"transactions": listOfDailyTx, "dailyTotal": dailyTotal};
+    double dailyTotalAmount = double.parse(dailyTotal.toStringAsFixed(2));
+    Map<String, dynamic> dailyMap = {"transactions": listOfDailyTx, "dailyTotal": dailyTotalAmount};
     txMap[currentTxDate] = dailyMap;
 
     _sixWeekTotal = sixWeekTotal;
@@ -137,7 +142,10 @@ class MonthlyDataTable {
   }
 
   void _addMonthlyCategoryTotals(String category, double amount) {
-    _monthlyCategoryTotals[category] = _monthlyCategoryTotals[category] + amount;
+    //ensure the double is 2 decimal places
+    double total = _monthlyCategoryTotals[category] + amount;
+
+    _monthlyCategoryTotals[category] = double.parse(total.toStringAsFixed(2));
   }
 
   //----------------------------------------------Getters-----------------------------------------

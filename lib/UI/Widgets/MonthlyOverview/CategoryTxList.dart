@@ -2,6 +2,7 @@ import 'package:first_flutter/Core/Constants/ColorPalette.dart';
 import 'package:first_flutter/Core/Models/UserTransaction.dart';
 import 'package:first_flutter/UI/Views/EditDeleteView/EditDeleteTransactionView.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CategoryTransactionList extends StatelessWidget {
   final UserTransaction _txData;
@@ -30,37 +31,45 @@ class CategoryTransactionList extends StatelessWidget {
         },
         child: Row(
           children: <Widget>[
-            _txData.desc == ""
-                ? Text(
-                    _txData.name,
-                    style: TextStyle(color: greenLightGreenishBlue(), fontWeight: FontWeight.bold, fontSize: 22),
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        _txData.name,
-                        style: TextStyle(color: greenLightGreenishBlue(), fontWeight: FontWeight.bold, fontSize: 22),
-                      ),
-                      Text(
-                        _txData.desc,
-                        style: TextStyle(color: greenLightGreenishBlue(), fontSize: 16),
-                      ),
-                    ],
-                  ),
+            Expanded(
+              child: Text(
+                DateFormat.Md().format(DateTime.fromMillisecondsSinceEpoch(_txData.date, isUtc: true)),
+                style: TextStyle(color: greyCityLights(), fontWeight: FontWeight.bold, fontSize: 22),
+              ),
+            ),
+            Expanded(
+              child: _txData.desc == ""
+                  ? Text(
+                      _txData.name,
+                      style: TextStyle(color: greyCityLights(), fontWeight: FontWeight.bold, fontSize: 22),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          _txData.name,
+                          style: TextStyle(color: greyCityLights(), fontWeight: FontWeight.bold, fontSize: 22),
+                        ),
+                        Text(
+                          _txData.desc,
+                          style: TextStyle(color: greyCityLights(), fontSize: 16),
+                        ),
+                      ],
+                    ),
+            ),
             Expanded(
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
                   _txData.category,
-                  style: TextStyle(color: greenLightGreenishBlue(), fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyle(color: greyCityLights(), fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
             ),
             Container(
               child: Text(
                 _txData.amount.toString(),
-                style: TextStyle(color: greenLightGreenishBlue(), fontWeight: FontWeight.bold, fontSize: 25),
+                style: TextStyle(color: greyCityLights(), fontWeight: FontWeight.bold, fontSize: 25),
               ),
             ),
           ],

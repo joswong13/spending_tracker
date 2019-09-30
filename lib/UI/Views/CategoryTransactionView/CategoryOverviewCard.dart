@@ -4,7 +4,7 @@ import '../../../Core/ViewModels/MonthProvider.dart';
 import '../../Widgets/MonthlyOverview/CategoryCard.dart';
 import '../../../Core/Constants/ColorPalette.dart';
 
-class MonthlyOverviewCard extends StatelessWidget {
+class CategoryOverviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final MonthProvider monthData = Provider.of<MonthProvider>(context);

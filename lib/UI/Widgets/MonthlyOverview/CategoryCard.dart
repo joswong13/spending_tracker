@@ -9,20 +9,23 @@ class CategoryCard extends StatelessWidget {
   final Color _color1;
   final Color _color2;
 
+  ///The widget that displays the category, amount and also is rendered with a gradient given 2 colors.
+  ///Clicking on this widget will use Navigator.push to go to the CategoryTransactionView.dart.
   CategoryCard(this._category, this._amount, this._color1, this._color2);
 
   @override
   Widget build(BuildContext context) {
     final monthData = Provider.of<MonthProvider>(context);
-
+    //preload getListOfCategoryTransactions
     return Expanded(
       child: InkWell(
         onTap: () {
-          monthData.getListOfCategoryTransactions(_category).then((resp) {
+          monthData.categoryType = _category;
+          monthData.getListOfCategoryTransactions().then((resp) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) {
-                return CategoryTransactionView(resp, _category, _amount);
+                return CategoryTransactionView(monthData.categoryUserTransactionList, _category, _amount);
               }),
             );
           });

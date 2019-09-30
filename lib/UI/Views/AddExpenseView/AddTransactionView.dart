@@ -265,9 +265,14 @@ class _TransactionScreenState extends State<TransactionScreen> {
               onPressed: () {
                 bool checkValue = _checkValidFields();
                 if (checkValue) {
+                  double amountDouble = double.parse(amountController.text);
                   monthData
-                      .insertUserTransaction(_trimText(nameController.text), double.parse(amountController.text),
-                          _trimText(descController.text), _selectedDate, _category)
+                      .insertUserTransaction(
+                          _trimText(nameController.text),
+                          double.parse(amountDouble.toStringAsFixed(2)),
+                          _trimText(descController.text),
+                          _selectedDate,
+                          _category)
                       .then((resp) {
                     _afterSubmit();
                   });
