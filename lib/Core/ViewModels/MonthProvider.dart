@@ -7,6 +7,7 @@ import '../Services/Sqflite/DatabaseHelper.dart';
 
 class MonthProvider with ChangeNotifier {
   MonthlyDataTable _monthlyDataTable = MonthlyDataTable();
+  NewMonth monthInstance = NewMonth.getInstance;
   Month _month;
   bool _busy = false;
   DataBaseHelper databaseHelper = DataBaseHelper();
@@ -30,6 +31,11 @@ class MonthProvider with ChangeNotifier {
         _setBusy(false);
       });
     });
+
+    StaticMonthModel.setDate(DateTime.now(), monthInstance);
+    print(monthInstance.date);
+    print(monthInstance.beginningOfMonthlyDateArray);
+    print(monthInstance.endOfMonthlyDateArray);
   }
 
   //----------------------------------------------Core Functions-----------------------------------------

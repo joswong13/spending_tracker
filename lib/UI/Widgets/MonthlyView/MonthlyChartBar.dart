@@ -45,7 +45,7 @@ class MonthlyChartBar extends StatelessWidget {
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
                         ..strokeWidth = 4
-                        ..color = ColorPalette.greyAmericanRiver,
+                        ..color = ColorPalette.greyDraculaOrchid,
                     ),
                   ),
                   // Solid text as fill.
