@@ -48,7 +48,7 @@ class _TransactionScreenState extends State<EditScreen> {
   InputDecoration _textDecoration(String label, String hintValue, int fieldClears) {
     return InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: greyCityLights()),
+      labelStyle: TextStyle(color: ColorPalette.greyCityLights),
       hintText: hintValue,
       enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(color: Theme.of(context).primaryColor),
@@ -151,23 +151,23 @@ class _TransactionScreenState extends State<EditScreen> {
               children: <Widget>[
                 Text(
                   "Edit Transaction",
-                  style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
-                  style: TextStyle(color: greyCityLights()),
+                  style: TextStyle(color: ColorPalette.greyCityLights),
                   decoration: _textDecoration('Name', 'Enter transaction name', 0),
                   controller: nameController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
-                  style: TextStyle(color: greyCityLights()),
+                  style: TextStyle(color: ColorPalette.greyCityLights),
                   decoration: _textDecoration('Description', '(Optional) Enter description', 1),
                   controller: descController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
-                  style: TextStyle(color: greyCityLights()),
+                  style: TextStyle(color: ColorPalette.greyCityLights),
                   decoration: _textDecoration('Amount', 'Enter the amount (eg. 0.00)', 2),
                   controller: amountController,
                 ),
@@ -176,9 +176,9 @@ class _TransactionScreenState extends State<EditScreen> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(
+                        child: const Text(
                           'Category:',
-                          style: TextStyle(color: greyCityLights(), fontSize: 18),
+                          style: TextStyle(color: ColorPalette.greyCityLights, fontSize: 18),
                         ),
                       ),
                       RaisedButton(
@@ -209,14 +209,14 @@ class _TransactionScreenState extends State<EditScreen> {
                         child: Text(
                           _selectedDate == null ? 'No Date Chosen' : DateFormat.yMd().format(_selectedDate),
                           style: TextStyle(
-                            color: greyCityLights(),
+                            color: ColorPalette.greyCityLights,
                             fontSize: 18,
                           ),
                         ),
                       ),
                       RaisedButton(
                         color: Theme.of(context).primaryColor,
-                        child: Text(
+                        child: const Text(
                           'Choose Date',
                           style: TextStyle(color: Colors.black),
                         ),
@@ -250,16 +250,16 @@ class _TransactionScreenState extends State<EditScreen> {
           children: <Widget>[
             FloatingActionButton.extended(
               heroTag: "backButton",
-              icon: Icon(Icons.arrow_back),
-              label: Text("Back"),
+              icon: const Icon(Icons.arrow_back),
+              label: const Text("Back"),
               onPressed: () async {
                 Navigator.pop(context);
               },
             ),
             FloatingActionButton.extended(
               heroTag: "deleteButton",
-              icon: Icon(Icons.delete),
-              label: Text("Delete"),
+              icon: const Icon(Icons.delete),
+              label: const Text("Delete"),
               onPressed: () async {
                 monthData.deleteUserTransaction(widget.id).then((resp) async {
                   if (resp == 1) {
@@ -271,8 +271,8 @@ class _TransactionScreenState extends State<EditScreen> {
             ),
             FloatingActionButton.extended(
               heroTag: "editButton",
-              icon: Icon(Icons.edit),
-              label: Text("Edit"),
+              icon: const Icon(Icons.edit),
+              label: const Text("Edit"),
               onPressed: () {
                 bool checkValue = _checkValidFields();
                 if (checkValue) {

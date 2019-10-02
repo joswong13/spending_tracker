@@ -13,9 +13,9 @@ class CategoryOverviewCard extends StatelessWidget {
     return Container(
         child: Column(
       children: <Widget>[
-        Text(
+        const Text(
           "Six Week Totals",
-          style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.w600),
+          style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
         ),
         Expanded(
           child: Row(
@@ -23,14 +23,14 @@ class CategoryOverviewCard extends StatelessWidget {
               CategoryCard(
                 categoryList[0]["category"],
                 categoryList[0]["amount"],
-                redPinkGlamor(),
-                tealRobinsEgg(),
+                ColorPalette.redPinkGlamor,
+                ColorPalette.tealRobinsEgg,
               ),
               CategoryCard(
                 categoryList[1]["category"],
                 categoryList[1]["amount"],
-                purpleExodusFruit(),
-                pinkPrunusAvium(),
+                ColorPalette.purpleExodusFruit,
+                ColorPalette.pinkPrunusAvium,
               ),
             ],
           ),
@@ -41,14 +41,14 @@ class CategoryOverviewCard extends StatelessWidget {
               CategoryCard(
                 categoryList[2]["category"],
                 categoryList[2]["amount"],
-                greenMintLeaf(),
-                blueElectron(),
+                ColorPalette.greenMintLeaf,
+                ColorPalette.blueElectron,
               ),
               CategoryCard(
                 categoryList[3]["category"],
                 categoryList[3]["amount"],
-                redChiGong(),
-                orangeville(),
+                ColorPalette.redChiGong,
+                ColorPalette.orangeville,
               ),
             ],
           ),
@@ -59,14 +59,14 @@ class CategoryOverviewCard extends StatelessWidget {
               CategoryCard(
                 categoryList[4]["category"],
                 categoryList[4]["amount"],
-                yellowBrightYarrow(),
-                orangeville(),
+                ColorPalette.yellowBrightYarrow,
+                ColorPalette.orangeville,
               ),
               CategoryCard(
                 categoryList[5]["category"],
                 categoryList[5]["amount"],
-                purpleExodusFruit(),
-                blueElectron(),
+                ColorPalette.purpleExodusFruit,
+                ColorPalette.blueElectron,
               ),
             ],
           ),
@@ -77,14 +77,14 @@ class CategoryOverviewCard extends StatelessWidget {
               CategoryCard(
                 categoryList[6]["category"],
                 categoryList[6]["amount"],
-                redChiGong(),
-                pinkPrunusAvium(),
+                ColorPalette.redChiGong,
+                ColorPalette.pinkPrunusAvium,
               ),
               CategoryCard(
                 categoryList[7]["category"],
                 categoryList[7]["amount"],
-                blueGreyGoodSamaritan(),
-                tealRobinsEgg(),
+                ColorPalette.blueGreyGoodSamaritan,
+                ColorPalette.tealRobinsEgg,
               ),
             ],
           ),

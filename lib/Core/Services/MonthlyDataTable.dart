@@ -58,9 +58,9 @@ class MonthlyDataTable {
         weeklyTotal = weeklyTotal + dailyTotal;
 
         Map<String, dynamic> currentDay = {
-          "weekdayShort": weekdaysShort[j],
-          "weekdayMid": weekdaysMid[j],
-          "weekdayLong": weekdaysLong[j],
+          "weekdayShort": WeekdayConstants.weekdaysShort[j],
+          "weekdayMid": WeekdayConstants.weekdaysMid[j],
+          "weekdayLong": WeekdayConstants.weekdaysLong[j],
           "date": currentWeek[j],
           "dailyTotal": dailyTotal,
           "weeklyTotal": 0.0,

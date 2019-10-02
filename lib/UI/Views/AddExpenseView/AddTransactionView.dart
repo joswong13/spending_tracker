@@ -32,13 +32,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
   InputDecoration _textDecoration(String label, String hintValue, int fieldClears) {
     return InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: Theme.of(context).primaryColor),
+      labelStyle: TextStyle(color: ColorPalette.greenLightGreenishBlue),
       hintText: hintValue,
       enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        borderSide: BorderSide(color: ColorPalette.greenLightGreenishBlue),
       ),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: Theme.of(context).primaryColor),
+        borderSide: BorderSide(color: ColorPalette.greenLightGreenishBlue),
       ),
       suffixIcon: IconButton(
         icon: Icon(Icons.clear),
@@ -146,25 +146,25 @@ class _TransactionScreenState extends State<TransactionScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
+                const Text(
                   "Add Transaction",
-                  style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Name', 'Enter transaction name', 0),
                   controller: nameController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Description', '(Optional) Enter description', 1),
                   controller: descController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Amount', 'Enter the amount (eg. 0.00)', 2),
                   controller: amountController,
                 ),
@@ -173,18 +173,18 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        child: Text(
+                        child: const Text(
                           'Category:',
-                          style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18),
+                          style: TextStyle(color: ColorPalette.greenLightGreenishBlue, fontSize: 18),
                         ),
                       ),
                       RaisedButton(
-                        color: Theme.of(context).primaryColor,
+                        color: ColorPalette.greenLightGreenishBlue,
                         child: Text(
                           _category,
                           style: TextStyle(color: Colors.black),
                         ),
-                        shape: RoundedRectangleBorder(
+                        shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(30),
                           ),
@@ -206,13 +206,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         child: Text(
                           _selectedDate == null ? 'No Date Chosen' : DateFormat.yMd().format(_selectedDate),
                           style: TextStyle(
-                            color: Theme.of(context).primaryColor,
+                            color: ColorPalette.greenLightGreenishBlue,
                             fontSize: 18,
                           ),
                         ),
                       ),
                       RaisedButton(
-                        color: Theme.of(context).primaryColor,
+                        color: ColorPalette.greenLightGreenishBlue,
                         child: Text(
                           'Choose Date',
                           style: TextStyle(color: Colors.black),
@@ -247,7 +247,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
           children: <Widget>[
             FloatingActionButton.extended(
               heroTag: "backButton",
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               label: _transactionAdded ? Text("Done") : Text("Back"),
               onPressed: () async {
                 if (_transactionAdded) {
@@ -260,8 +260,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
             ),
             FloatingActionButton.extended(
               heroTag: "addButton",
-              icon: Icon(Icons.add_circle_outline),
-              label: Text("Add"),
+              icon: const Icon(Icons.add_circle_outline),
+              label: const Text("Add"),
               onPressed: () {
                 bool checkValue = _checkValidFields();
                 if (checkValue) {

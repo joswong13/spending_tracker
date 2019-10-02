@@ -37,7 +37,7 @@ class MonthlyTableView extends StatelessWidget {
         children: <Widget>[
           Text(
             DateFormat.yMMM().format(monthData.date),
-            style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.w600),
+            style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
           ),
           Table(
             children: monthData.monthlyDataTable.map((week) {
@@ -58,7 +58,8 @@ class MonthlyTableView extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             "${DateFormat.MMMd().format(week[0]["date"])} - ${DateFormat.MMMd().format(week[6]["date"])}",
-                            style: TextStyle(fontSize: 16, color: greyCityLights(), fontWeight: FontWeight.w600),
+                            style: TextStyle(
+                                fontSize: 16, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
                           ),
                           MonthlyChartBar(week[0]["weeklyTotal"], monthData.sixWeekTotal, sizeConfig.blockSizeVertical),
                         ],
