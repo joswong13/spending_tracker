@@ -7,7 +7,7 @@ import 'package:first_flutter/Core/ViewModels/BottomNavBarScreenProvider.dart';
 
 //Widgets
 import '../Monthly/MonthlyView.dart';
-import '../Monthly/MonthlyOverviewCard.dart';
+import '../CategoryTransactionView/CategoryOverviewCard.dart';
 import '../Weekly/WeeklyView.dart';
 
 class HomeView extends StatefulWidget {
@@ -20,7 +20,7 @@ class _HomeViewState extends State<HomeView> {
   static List<Widget> _widgetOptions = <Widget>[
     MonthlyView(),
     WeeklyView(),
-    MonthlyOverviewCard(),
+    CategoryOverviewCard(),
   ];
 
   @override

@@ -7,9 +7,12 @@ import '../Services/Sqflite/DatabaseHelper.dart';
 
 class MonthProvider with ChangeNotifier {
   MonthlyDataTable _monthlyDataTable = MonthlyDataTable();
+  NewMonth monthInstance = NewMonth.getInstance;
   Month _month;
   bool _busy = false;
   DataBaseHelper databaseHelper = DataBaseHelper();
+  String _categoryType = '';
+  List<UserTransaction> _categoryUserTransactionList = [];
 
   ///Generate initial calendar and query from database.
   MonthProvider() {
@@ -17,10 +20,7 @@ class MonthProvider with ChangeNotifier {
     DateTime tempInitDate = DateTime.now();
     _month = Month(DateTime.utc(tempInitDate.year, tempInitDate.month, tempInitDate.day));
 
-    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
-    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
-
-    _getUserTransactionsBetween(beginningOfQuery, endOfQuery).then((listOfUserTx) async {
+    _getUserTransactionsBetween().then((listOfUserTx) async {
       Map<String, dynamic> temp = {
         "monthlyDateArray": _month.monthlyDateArray,
         "tx": listOfUserTx,
@@ -31,6 +31,11 @@ class MonthProvider with ChangeNotifier {
         _setBusy(false);
       });
     });
+
+    StaticMonthModel.setDate(DateTime.now(), monthInstance);
+    print(monthInstance.date);
+    print(monthInstance.beginningOfMonthlyDateArray);
+    print(monthInstance.endOfMonthlyDateArray);
   }
 
   //----------------------------------------------Core Functions-----------------------------------------
@@ -49,11 +54,9 @@ class MonthProvider with ChangeNotifier {
       _setBusy(true);
       _month.monthOrYearDiff(date);
 
-      int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
-      int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
       //Query
       //Call build table fcn
-      List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween(beginningOfQuery, endOfQuery);
+      List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween();
       Map<String, dynamic> temp = {
         "monthlyDateArray": _month.monthlyDateArray,
         "tx": listOfUserTx,
@@ -70,6 +73,11 @@ class MonthProvider with ChangeNotifier {
       _month.setCurrentWeekIndex(date);
       _setBusy(false);
     }
+  }
+
+  //----------------------------------------------Setters-----------------------------------------
+  set categoryType(String category) {
+    _categoryType = category;
   }
 
   //----------------------------------------------Getters-----------------------------------------
@@ -114,12 +122,15 @@ class MonthProvider with ChangeNotifier {
     return _monthlyDataTable.monthlyCategoryTotals;
   }
 
+  List<UserTransaction> get categoryUserTransactionList {
+    return _categoryUserTransactionList;
+  }
+
   //----------------------------------------------External Functions-----------------------------------------
 
   ///Changes the current date in Provider to the one selected.
   Future<void> changeDate(DateTime date) async {
     await _changeDateAndQuery(date);
-    //notifyListeners();
   }
 
   ///Resets the current date in Provider to today.
@@ -133,17 +144,19 @@ class MonthProvider with ChangeNotifier {
     _setBusy(true);
     _month.monthOrYearDiff(date);
 
-    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
-    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
     //Query
     //Call build table fcn
-    List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween(beginningOfQuery, endOfQuery);
+    List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween();
 
     Map<String, dynamic> temp = {
       "monthlyDateArray": _month.monthlyDateArray,
       "tx": listOfUserTx,
       "month": _month.date.month
     };
+
+    if (_categoryType != "") {
+      getListOfCategoryTransactions();
+    }
 
     await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
       _monthlyDataTable = resp;
@@ -156,6 +169,20 @@ class MonthProvider with ChangeNotifier {
     print("[MonthProvider] - setCurrentWeekFromMonthlyView called");
     _setBusy(true);
     _month.setCurrentWeekIndex(date);
+    _setBusy(false);
+  }
+
+  ///Using the categoryType in the MonthProvider object, does a SQL search. Then converts each transaction to a UserTransaction object.
+  Future<void> getListOfCategoryTransactions() async {
+    _setBusy(true);
+    _categoryUserTransactionList.clear();
+
+    await _getCategoryList(_categoryType).then((resp) {
+      for (int i = 0; i < resp.length; i++) {
+        _categoryUserTransactionList.add(UserTransaction.fromDb(resp[i]));
+      }
+    });
+
     _setBusy(false);
   }
 
@@ -192,12 +219,24 @@ class MonthProvider with ChangeNotifier {
   }
 
   ///Gets all the user transaction.
+  ///Not used in any of the widgets.
   Future<List<Map<String, dynamic>>> getAllUserTransaction() async {
     return await databaseHelper.getAllUserTransactionList();
   }
 
+  ///Private function that gets all the user transaction.
+  Future<List<Map<String, dynamic>>> _getCategoryList(String category) async {
+    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
+    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
+
+    return await databaseHelper.getCategoryList(beginningOfQuery, endOfQuery, category);
+  }
+
   ///Private function that is called when the Month object is refreshed.
-  Future<List<Map<String, dynamic>>> _getUserTransactionsBetween(int startOfMonth, int endOfMonth) async {
-    return await databaseHelper.getUserTransactionsBetween(startOfMonth, endOfMonth);
+  Future<List<Map<String, dynamic>>> _getUserTransactionsBetween() async {
+    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
+    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
+
+    return await databaseHelper.getUserTransactionsBetween(beginningOfQuery, endOfQuery);
   }
 }

@@ -4,11 +4,10 @@ import '../../../Core/Constants/ColorPalette.dart';
 class ChartBar extends StatelessWidget {
   final String _weekday;
   final String _date;
-  final double _dailyTotal;
   final double _percWeeklyTotal;
 
   ///This class displays the individual chart bars inside the Chart Widget. The parent of this widget is the Chart Widget.
-  ChartBar(this._weekday, this._date, this._dailyTotal, this._percWeeklyTotal);
+  ChartBar(this._weekday, this._date, this._percWeeklyTotal);
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +27,14 @@ class ChartBar extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  border: Border.all(color: greenLightGreenishBlue(), width: 3),
+                  border: Border.all(color: ColorPalette.greenLightGreenishBlue, width: 3),
                   //color: barBgColor(),
                   // gradient: LinearGradient(
                   //     begin: Alignment.bottomRight,
                   //     end: Alignment.topLeft,
                   //     stops: [0.3, 0.9],
                   //     colors: [Colors.purple[900], Colors.deepPurple[600]]),
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(30),
                 ),
               ),
               FractionallySizedBox(
@@ -43,13 +42,13 @@ class ChartBar extends StatelessWidget {
                 heightFactor: _percWeeklyTotal,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: greenLightGreenishBlue(),
+                    color: ColorPalette.greenLightGreenishBlue,
                     // gradient: LinearGradient(
                     //     begin: Alignment.bottomRight,
                     //     end: Alignment.topLeft,
                     //     stops: [0.3, 0.9],
                     //     colors: [Colors.blue[600], Colors.blue[300]]),
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
               )

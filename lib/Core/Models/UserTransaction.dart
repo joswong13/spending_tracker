@@ -11,7 +11,7 @@ class UserTransaction {
   UserTransaction.fromDb(Map<String, dynamic> data) {
     this._id = data["id"];
     this._name = data["name"];
-    this._amount = data["amount"];
+    this._amount = double.parse(data["amount"].toStringAsFixed(2));
     this._date = data["date"];
     this._category = data["category"];
     this._desc = data["desc"];

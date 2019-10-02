@@ -8,7 +8,7 @@ import './UI/Views/HomeView/HomeView.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: greyDraculaOrchid(), //top bar color
+    statusBarColor: ColorPalette.greyDraculaOrchid, //top bar color
     statusBarIconBrightness: Brightness.light, //top bar icons
     systemNavigationBarColor: Colors.black, //bottom bar color
     systemNavigationBarIconBrightness: Brightness.light, //bottom bar icons
@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          scaffoldBackgroundColor: greyDraculaOrchid(),
-          buttonColor: greenLightGreenishBlue(),
+          scaffoldBackgroundColor: ColorPalette.greyDraculaOrchid,
+          buttonColor: ColorPalette.greenLightGreenishBlue,
           brightness: Brightness.dark,
-          primaryColor: greenLightGreenishBlue(),
+          primaryColor: ColorPalette.greenLightGreenishBlue,
         ),
         home: HomeView(),
         //routes: <String, WidgetBuilder>{'/addTransaction': (BuildContext context) => TransactionScreen()},
