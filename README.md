@@ -15,10 +15,16 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] add a way to view the category totals
 - [x] remove appbar in favor of bottom navigation screen (maybe)
 - [x] improve codebase logistics (remove functions out of AddExpenseView to its own dart file)
-- [ ] improve flow of app
+- [x] improve flow of app
 - [x] improve navigation between widgets
 - [x] improved speed of calculating monthly data table object by adding compute (splitting to seperate thread)
-- [ ] need to change bottom nav bar icons
+- [x] need to change bottom nav bar icons
 - [x] removed unused classes/files
 - [ ] add version/version_two screenshots
-- [ ] add a way to click into each category
+- [x] add a way to click into each category
+- [x] refactor models and static methods
+- [x] converted color constants to static const variables
+- [x] added a way to edit transactions when clicked in from category transaction page
+- [x] improved readability in month view
+- [ ] ability to change colors (low priority)
+- [x] added const to widgets that will never be re-rendered when ChangeNotifier fires (eg. Text widgets and TextStyle widgets)
