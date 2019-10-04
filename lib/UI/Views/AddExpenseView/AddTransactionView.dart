@@ -32,13 +32,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
   InputDecoration _textDecoration(String label, String hintValue, int fieldClears) {
     return InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: ColorPalette.greenLightGreenishBlue),
+      labelStyle: TextStyle(color: greenLightGreenishBlue),
       hintText: hintValue,
       enabledBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: ColorPalette.greenLightGreenishBlue),
+        borderSide: BorderSide(color: greenLightGreenishBlue),
       ),
       focusedBorder: UnderlineInputBorder(
-        borderSide: BorderSide(color: ColorPalette.greenLightGreenishBlue),
+        borderSide: BorderSide(color: greenLightGreenishBlue),
       ),
       suffixIcon: IconButton(
         icon: Icon(Icons.clear),
@@ -148,7 +148,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
               children: <Widget>[
                 const Text(
                   "Add Transaction",
-                  style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 28, color: greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
                   style: const TextStyle(color: Colors.green),
@@ -175,11 +175,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       Expanded(
                         child: const Text(
                           'Category:',
-                          style: TextStyle(color: ColorPalette.greenLightGreenishBlue, fontSize: 18),
+                          style: TextStyle(color: greenLightGreenishBlue, fontSize: 18),
                         ),
                       ),
                       RaisedButton(
-                        color: ColorPalette.greenLightGreenishBlue,
+                        color: greenLightGreenishBlue,
                         child: Text(
                           _category,
                           style: TextStyle(color: Colors.black),
@@ -206,13 +206,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         child: Text(
                           _selectedDate == null ? 'No Date Chosen' : DateFormat.yMd().format(_selectedDate),
                           style: TextStyle(
-                            color: ColorPalette.greenLightGreenishBlue,
+                            color: greenLightGreenishBlue,
                             fontSize: 18,
                           ),
                         ),
                       ),
                       RaisedButton(
-                        color: ColorPalette.greenLightGreenishBlue,
+                        color: greenLightGreenishBlue,
                         child: Text(
                           'Choose Date',
                           style: TextStyle(color: Colors.black),

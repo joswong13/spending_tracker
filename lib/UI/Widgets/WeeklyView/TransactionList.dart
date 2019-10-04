@@ -26,17 +26,16 @@ class TransactionList extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "${_data["weekdayLong"]}",
-                    style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 28, color: greyCityLights, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
                   "\$ ${_data["dailyTotal"]}",
-                  style:
-                      TextStyle(fontSize: 18, color: ColorPalette.greenLightGreenishBlue, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, color: greenLightGreenishBlue, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   " (${_data["percWeeklySpending"]}%)",
-                  style: TextStyle(fontSize: 18, color: ColorPalette.purpleShyMoment, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, color: purpleShyMoment, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

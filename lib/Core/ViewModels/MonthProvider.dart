@@ -1,3 +1,4 @@
+import 'package:first_flutter/Core/Models/MonthlyDataTable.dart';
 import 'package:first_flutter/Core/Models/UserTransaction.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,9 @@ import '../Services/MonthlyDataTable.dart';
 import '../Services/Sqflite/DatabaseHelper.dart';
 
 class MonthProvider with ChangeNotifier {
-  MonthlyDataTable _monthlyDataTable = MonthlyDataTable();
-  NewMonth monthInstance = NewMonth.getInstance;
-  Month _month;
+  //MonthlyDataTable _monthlyDataTable = MonthlyDataTable();
+  Month monthInstance = Month.getInstance;
+  MonthlyDataTable dataTable = MonthlyDataTable.getInstance;
   bool _busy = false;
   DataBaseHelper databaseHelper = DataBaseHelper();
   String _categoryType = '';
@@ -17,25 +18,20 @@ class MonthProvider with ChangeNotifier {
   ///Generate initial calendar and query from database.
   MonthProvider() {
     _setBusy(true);
-    DateTime tempInitDate = DateTime.now();
-    _month = Month(DateTime.utc(tempInitDate.year, tempInitDate.month, tempInitDate.day));
+    setDate(DateTime.now(), monthInstance);
 
     _getUserTransactionsBetween().then((listOfUserTx) async {
       Map<String, dynamic> temp = {
-        "monthlyDateArray": _month.monthlyDateArray,
+        "monthlyDateArray": monthInstance.monthlyDateArray,
         "tx": listOfUserTx,
-        "month": _month.date.month
+        "month": monthInstance.date.month,
       };
+
       await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
-        _monthlyDataTable = resp;
+        dataTable = resp;
         _setBusy(false);
       });
     });
-
-    StaticMonthModel.setDate(DateTime.now(), monthInstance);
-    print(monthInstance.date);
-    print(monthInstance.beginningOfMonthlyDateArray);
-    print(monthInstance.endOfMonthlyDateArray);
   }
 
   //----------------------------------------------Core Functions-----------------------------------------
@@ -49,28 +45,28 @@ class MonthProvider with ChangeNotifier {
   ///Check if given date is same month and year as current date. If not, then change date, build MonthlyDateArray and then build MonthlyDataTable.
   ///Used for Reset button and Changing months by swiping left and right.
   Future<void> _changeDateAndQuery(DateTime date) async {
-    if (date.year != _month.date.year || date.month != _month.date.month) {
+    if (date.year != monthInstance.date.year || date.month != monthInstance.date.month) {
       print("[MonthProvider] - monthOrYearDiff called");
       _setBusy(true);
-      _month.monthOrYearDiff(date);
+      setDate(date, monthInstance);
 
       //Query
       //Call build table fcn
       List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween();
       Map<String, dynamic> temp = {
-        "monthlyDateArray": _month.monthlyDateArray,
+        "monthlyDateArray": monthInstance.monthlyDateArray,
         "tx": listOfUserTx,
-        "month": _month.date.month
+        "month": monthInstance.date.month,
       };
       await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
-        _monthlyDataTable = resp;
+        dataTable = resp;
         _setBusy(false);
       });
     } else {
       print("[MonthProvider] - setCurrentWeekIndex called");
       //No need to call query if same month (if user is pressing reset when they are on the same month and year)
       _setBusy(true);
-      _month.setCurrentWeekIndex(date);
+      setCurrentWeekIndex(date, monthInstance);
       _setBusy(false);
     }
   }
@@ -84,17 +80,17 @@ class MonthProvider with ChangeNotifier {
 
   ///Get the date currently selected.
   DateTime get date {
-    return _month.date;
+    return monthInstance.date;
   }
 
   ///Returns the full month list object.
   List<List<Map<String, dynamic>>> get monthlyDataTable {
-    return _monthlyDataTable.monthlyDataTableObject;
+    return dataTable.monthlyDataTableObject;
   }
 
   ///Gets the current week's index and returns the current weeks full list object.
   List<Map<String, dynamic>> get currentWeek {
-    return _monthlyDataTable.monthlyDataTableObject[_month.currentWeekIndex];
+    return dataTable.monthlyDataTableObject[monthInstance.currentWeekIndex];
   }
 
   /// Returns the first day of the week and last day of the week as a DateTime object.
@@ -109,7 +105,7 @@ class MonthProvider with ChangeNotifier {
   }
 
   double get sixWeekTotal {
-    return _monthlyDataTable.sixWeekTotal;
+    return dataTable.sixWeekTotal;
   }
 
   ///Used to set widget tree status. Returns the value of the busy status.
@@ -119,7 +115,7 @@ class MonthProvider with ChangeNotifier {
 
   ///Returns a list of maps for each category.
   List<Map<String, dynamic>> get monthlyCategoryTotals {
-    return _monthlyDataTable.monthlyCategoryTotals;
+    return dataTable.monthlyCategoryTotalsAsList;
   }
 
   List<UserTransaction> get categoryUserTransactionList {
@@ -142,16 +138,16 @@ class MonthProvider with ChangeNotifier {
   ///Refreshes the current queried transactions after inserting/updating/deleting a transaction.
   Future<void> refreshTransactions() async {
     _setBusy(true);
-    _month.monthOrYearDiff(date);
+    setDate(date, monthInstance);
 
     //Query
     //Call build table fcn
     List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween();
 
     Map<String, dynamic> temp = {
-      "monthlyDateArray": _month.monthlyDateArray,
+      "monthlyDateArray": monthInstance.monthlyDateArray,
       "tx": listOfUserTx,
-      "month": _month.date.month
+      "month": monthInstance.date.month,
     };
 
     if (_categoryType != "") {
@@ -159,7 +155,7 @@ class MonthProvider with ChangeNotifier {
     }
 
     await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
-      _monthlyDataTable = resp;
+      dataTable = resp;
       _setBusy(false);
     });
   }
@@ -168,7 +164,7 @@ class MonthProvider with ChangeNotifier {
   Future<void> setCurrentWeekIndexFromMonthlyView(DateTime date) async {
     print("[MonthProvider] - setCurrentWeekFromMonthlyView called");
     _setBusy(true);
-    _month.setCurrentWeekIndex(date);
+    setCurrentWeekIndex(date, monthInstance);
     _setBusy(false);
   }
 
@@ -226,16 +222,16 @@ class MonthProvider with ChangeNotifier {
 
   ///Private function that gets all the user transaction.
   Future<List<Map<String, dynamic>>> _getCategoryList(String category) async {
-    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
-    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
+    int beginningOfQuery = monthInstance.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
+    int endOfQuery = monthInstance.endOfMonthlyDateArray.millisecondsSinceEpoch;
 
     return await databaseHelper.getCategoryList(beginningOfQuery, endOfQuery, category);
   }
 
   ///Private function that is called when the Month object is refreshed.
   Future<List<Map<String, dynamic>>> _getUserTransactionsBetween() async {
-    int beginningOfQuery = _month.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
-    int endOfQuery = _month.endOfMonthlyDateArray.millisecondsSinceEpoch;
+    int beginningOfQuery = monthInstance.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
+    int endOfQuery = monthInstance.endOfMonthlyDateArray.millisecondsSinceEpoch;
 
     return await databaseHelper.getUserTransactionsBetween(beginningOfQuery, endOfQuery);
   }

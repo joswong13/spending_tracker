@@ -20,7 +20,7 @@ class MonthlyChartBar extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                border: Border.all(color: ColorPalette.greenLightGreenishBlue, width: 3),
+                border: Border.all(color: greenLightGreenishBlue, width: 3),
                 borderRadius: BorderRadius.circular(30),
               ),
             ),
@@ -28,7 +28,7 @@ class MonthlyChartBar extends StatelessWidget {
               widthFactor: _monthlyTotal > 0.0 ? _weeklyTotal / _monthlyTotal : 0.0,
               child: Container(
                 decoration: BoxDecoration(
-                  color: ColorPalette.greenLightGreenishBlue,
+                  color: greenLightGreenishBlue,
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
@@ -45,14 +45,14 @@ class MonthlyChartBar extends StatelessWidget {
                       foreground: Paint()
                         ..style = PaintingStyle.stroke
                         ..strokeWidth = 4
-                        ..color = ColorPalette.greyDraculaOrchid,
+                        ..color = greyDraculaOrchid,
                     ),
                   ),
                   // Solid text as fill.
                   Text(
                     "\$$_weeklyTotal",
                     style: TextStyle(
-                      color: ColorPalette.greyCityLights,
+                      color: greyCityLights,
                       fontSize: 38,
                       fontWeight: FontWeight.bold,
                     ),

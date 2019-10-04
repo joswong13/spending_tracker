@@ -23,16 +23,16 @@ class CategoryTransactionView extends StatelessWidget {
             children: <Widget>[
               Text(
                 _categoryType,
-                style: TextStyle(fontSize: 28, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 28, color: greyCityLights, fontWeight: FontWeight.w600),
               ),
               Text(
                 "\$" + _amount.toString(),
-                style: TextStyle(fontSize: 28, color: ColorPalette.greenLightGreenishBlue, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 28, color: greenLightGreenishBlue, fontWeight: FontWeight.w600),
               ),
               if (_categoryList.isEmpty)
                 Text(
                   "No transactions for " + _categoryType,
-                  style: TextStyle(fontSize: 22, color: ColorPalette.greyCityLights, fontWeight: FontWeight.w500),
+                  style: TextStyle(fontSize: 22, color: greyCityLights, fontWeight: FontWeight.w500),
                 ),
               if (_categoryList.isNotEmpty)
                 ..._categoryList.map((eachItem) {
