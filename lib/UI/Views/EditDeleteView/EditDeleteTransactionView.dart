@@ -13,8 +13,9 @@ class EditScreen extends StatefulWidget {
   final int date;
   final String category;
   final int id;
+  final int uploaded;
 
-  EditScreen(this.id, this.name, this.desc, this.amount, this.date, this.category);
+  EditScreen(this.id, this.name, this.desc, this.amount, this.date, this.category, this.uploaded);
 
   @override
   _TransactionScreenState createState() => _TransactionScreenState(name, desc, amount, date, category);
@@ -281,8 +282,14 @@ class _TransactionScreenState extends State<EditScreen> {
                 bool checkValue = _checkValidFields();
                 if (checkValue) {
                   monthData
-                      .updateUserTransaction(widget.id, _trimText(nameController.text),
-                          double.parse(amountController.text), _trimText(descController.text), _selectedDate, _category)
+                      .updateUserTransaction(
+                          widget.id,
+                          _trimText(nameController.text),
+                          double.parse(amountController.text),
+                          _trimText(descController.text),
+                          _selectedDate,
+                          _category,
+                          widget.uploaded)
                       .then((resp) async {
                     if (resp == 1) {
                       await monthData.refreshTransactions();

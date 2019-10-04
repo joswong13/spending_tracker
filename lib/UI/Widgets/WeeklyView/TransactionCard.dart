@@ -17,7 +17,8 @@ class TransactionCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (_) {
-            return EditScreen(_txData.id, _txData.name, _txData.desc, _txData.amount, _txData.date, _txData.category);
+            return EditScreen(_txData.id, _txData.name, _txData.desc, _txData.amount, _txData.date, _txData.category,
+                _txData.uploaded);
           }),
         );
       },

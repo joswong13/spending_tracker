@@ -8,7 +8,7 @@ class DataBaseHelper {
   static DataBaseHelper _databaseHelper;
   Database _database;
   static final String _createDatabaseString =
-      "CREATE TABLE userTransaction (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, amount REAL, date INTEGER, category TEXT, desc TEXT)";
+      "CREATE TABLE userTransaction (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, amount REAL, date INTEGER, category TEXT, desc TEXT, uploaded INTEGER)";
 
   DataBaseHelper._createInstance();
 

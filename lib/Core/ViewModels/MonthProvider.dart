@@ -192,12 +192,14 @@ class MonthProvider with ChangeNotifier {
     tx.desc = desc;
     tx.date = date.millisecondsSinceEpoch;
     tx.category = category;
+    tx.uploaded = 0;
 
     return databaseHelper.insertUserTransaction(tx);
   }
 
   ///Given the id, name, amount, desc, date, and category; update the transaction.
-  Future<int> updateUserTransaction(int id, String name, double amount, String desc, DateTime date, String category) {
+  Future<int> updateUserTransaction(
+      int id, String name, double amount, String desc, DateTime date, String category, int uploaded) {
     UserTransaction tx = UserTransaction();
     tx.id = id;
     tx.name = name;
@@ -205,6 +207,7 @@ class MonthProvider with ChangeNotifier {
     tx.desc = desc;
     tx.date = date.millisecondsSinceEpoch;
     tx.category = category;
+    tx.uploaded = uploaded;
 
     return databaseHelper.updateUserTransaction(tx);
   }
