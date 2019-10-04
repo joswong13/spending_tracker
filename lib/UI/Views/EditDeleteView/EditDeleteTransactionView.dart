@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../Core/ViewModels/MonthProvider.dart';
-import '../../Widgets/AddExpenseView/DialogPickers.dart';
-import '../../Widgets/EditDeleteView/Dialog.dart';
+import '../../Widgets/Dialog/AddTxDialogPickers.dart';
+import '../../Widgets/Dialog/DeleteDialog.dart';
 
 class EditScreen extends StatefulWidget {
   final String name;

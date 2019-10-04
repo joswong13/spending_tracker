@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../Core/ViewModels/MonthProvider.dart';
-import '../../Widgets/AddExpenseView/DialogPickers.dart';
+import '../../Widgets/Dialog/AddTxDialogPickers.dart';
 import '../../../Core/Constants/ColorPalette.dart';
 
 class TransactionScreen extends StatefulWidget {

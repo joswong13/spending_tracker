@@ -7,7 +7,6 @@ import '../Services/MonthlyDataTable.dart';
 import '../Services/Sqflite/DatabaseHelper.dart';
 
 class MonthProvider with ChangeNotifier {
-  //MonthlyDataTable _monthlyDataTable = MonthlyDataTable();
   Month monthInstance = Month.getInstance;
   MonthlyDataTable dataTable = MonthlyDataTable.getInstance;
   bool _busy = false;
@@ -136,6 +135,7 @@ class MonthProvider with ChangeNotifier {
   }
 
   ///Refreshes the current queried transactions after inserting/updating/deleting a transaction.
+  ///If the categoryType is not empty, then also get the category transactions.
   Future<void> refreshTransactions() async {
     _setBusy(true);
     setDate(date, monthInstance);

@@ -8,7 +8,7 @@ Future<bool> deleteDialog(BuildContext context) async {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          title: Text('Delete this transaction?'),
+          title: const Text('Delete this transaction?'),
           actions: <Widget>[
             FlatButton(
               child: const Text('Yes'),

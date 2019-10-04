@@ -1,14 +1,16 @@
-import 'package:first_flutter/UI/Views/AddExpenseView/AddTransactionView.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 //Provider
 import 'package:first_flutter/Core/ViewModels/BottomNavBarScreenProvider.dart';
+import 'package:first_flutter/Core/ViewModels/MonthProvider.dart';
 
 //Widgets
+import 'package:first_flutter/UI/Views/AddExpenseView/AddTransactionView.dart';
 import '../Monthly/MonthlyView.dart';
 import '../CategoryTransactionView/CategoryOverviewCard.dart';
 import '../Weekly/WeeklyView.dart';
+import '../../Widgets/Dialog/MonthYearDialog.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -26,6 +28,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final BottomNavBarScreenProvider indexProvider = Provider.of<BottomNavBarScreenProvider>(context);
+    final monthData = Provider.of<MonthProvider>(context);
 
     return Scaffold(
       body: SafeArea(child: _widgetOptions.elementAt(indexProvider.getCurrentPageIndex)),
@@ -66,6 +69,17 @@ class _HomeViewState extends State<HomeView> {
               }),
             );
           }
+        },
+      ),
+      //floatingActionButtonLocation: FloatingActionButtonLocation,
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        child: Icon(Icons.date_range),
+        onPressed: () async {
+          DateTime pickedDate = await monthYearPicker(context, monthData.date);
+
+          print(pickedDate);
+          monthData.changeDate(pickedDate);
         },
       ),
     );

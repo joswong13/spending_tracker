@@ -11,6 +11,7 @@ class StaticMonthlyDataTable {
     return temp;
   }
 }
+//-------------------------Private functions---------------------------------------------------------------------------
 
 ///Given the monthly date array and the tx list, builds the monthly view array.
 MonthlyDataTable _buildMonthlyTable(List<List<DateTime>> monthlyDateArray, List<Map<String, dynamic>> tx, int month,

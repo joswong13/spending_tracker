@@ -7,7 +7,7 @@ Future<DateTime> presentDatePicker(BuildContext context, DateTime selectedDate) 
   DateTime datePicked = await showDatePicker(
     context: context,
     initialDate: selectedDate == null ? DateTime.now() : selectedDate,
-    firstDate: DateTime(2019),
+    firstDate: DateTime(2018),
     lastDate: DateTime.now(),
   );
   if (datePicked == null) {
@@ -23,7 +23,7 @@ Future<String> categoryDialog(BuildContext context) async {
       builder: (BuildContext context) {
         return SimpleDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          title: Text('Select Category'),
+          title: const Text('Select Category'),
           children: <Widget>[
             Divider(
               color: greyCityLights,

@@ -28,3 +28,4 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] improved readability in month view
 - [ ] ability to change colors (low priority)
 - [x] added const to widgets that will never be re-rendered when ChangeNotifier fires (eg. Text widgets and TextStyle widgets)
+- [x] added a confirmation dialog before deleting a transaction
