@@ -35,10 +35,42 @@ class _HomeViewState extends State<HomeView> {
 
     //BottomNavBar is always 8% of usable screen
     final bottomNavBarHieght = sizeConfig.blockSizeVertical * 8;
+    final topIconSize = sizeConfig.blockSizeVertical * 4.1;
 
     return Scaffold(
       body: SafeArea(
-        child: _widgetOptions.elementAt(indexProvider.getCurrentPageIndex),
+        child: Stack(
+          children: [
+            _widgetOptions.elementAt(indexProvider.getCurrentPageIndex),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: const Icon(Icons.refresh),
+                    iconSize: topIconSize,
+                    color: Theme.of(context).primaryColor,
+                    tooltip: "Reset",
+                    onPressed: () {
+                      monthData.changeDate(DateTime.now());
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.date_range),
+                    iconSize: topIconSize,
+                    color: Theme.of(context).primaryColor,
+                    tooltip: "Pick date",
+                    onPressed: () async {
+                      DateTime pickedDate = await monthYearPicker(context, monthData.date);
+                      monthData.changeDate(pickedDate);
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: SizedBox(
         height: bottomNavBarHieght,
@@ -81,17 +113,6 @@ class _HomeViewState extends State<HomeView> {
             }
           },
         ),
-      ),
-      //floatingActionButtonLocation: FloatingActionButtonLocation,
-      floatingActionButton: FloatingActionButton(
-        mini: true,
-        child: Icon(Icons.date_range),
-        onPressed: () async {
-          DateTime pickedDate = await monthYearPicker(context, monthData.date);
-
-          print(pickedDate);
-          monthData.changeDate(pickedDate);
-        },
       ),
     );
   }
