@@ -1,3 +1,4 @@
+import 'package:first_flutter/Core/Constants/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,47 +30,57 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final BottomNavBarScreenProvider indexProvider = Provider.of<BottomNavBarScreenProvider>(context);
     final monthData = Provider.of<MonthProvider>(context);
+    final SizeConfig sizeConfig = SizeConfig();
+    sizeConfig.initValues(context);
+
+    //BottomNavBar is always 8% of usable screen
+    final bottomNavBarHieght = sizeConfig.blockSizeVertical * 8;
 
     return Scaffold(
-      body: SafeArea(child: _widgetOptions.elementAt(indexProvider.getCurrentPageIndex)),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            title: Text('Monthly'),
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.view_week),
-            title: Text('Weekly'),
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            title: Text('Category'),
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            title: Text('Add'),
-            backgroundColor: Colors.black,
-          ),
-        ],
-        currentIndex: indexProvider.getCurrentPageIndex,
-        selectedItemColor: Theme.of(context).primaryColor,
-        onTap: (int index) {
-          if (index <= 2) {
-            indexProvider.currentPageIndex = index;
-          } else {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) {
-                return TransactionScreen();
-              }),
-            );
-          }
-        },
+      body: SafeArea(
+        child: _widgetOptions.elementAt(indexProvider.getCurrentPageIndex),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: bottomNavBarHieght,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              title: Text('Monthly'),
+              backgroundColor: Colors.black,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.view_week),
+              title: Text('Weekly'),
+              backgroundColor: Colors.black,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              title: Text('Category'),
+              backgroundColor: Colors.black,
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle_outline),
+              title: Text('Add'),
+              backgroundColor: Colors.black,
+            ),
+          ],
+          currentIndex: indexProvider.getCurrentPageIndex,
+          selectedItemColor: Theme.of(context).primaryColor,
+          onTap: (int index) {
+            if (index <= 2) {
+              indexProvider.currentPageIndex = index;
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) {
+                  return TransactionScreen();
+                }),
+              );
+            }
+          },
+        ),
       ),
       //floatingActionButtonLocation: FloatingActionButtonLocation,
       floatingActionButton: FloatingActionButton(

@@ -7,7 +7,15 @@ class SizeConfig {
   static double _blockSizeHorizontal;
   static double _blockSizeVertical;
 
-  SizeConfig(BuildContext context) {
+  // SizeConfig(BuildContext context) {
+  //   _mediaQueryData = MediaQuery.of(context);
+  //   _screenWidth = _mediaQueryData.size.width;
+  //   _screenHeight = _mediaQueryData.size.height;
+  //   _blockSizeHorizontal = _screenWidth / 100;
+  //   _blockSizeVertical = _screenHeight / 100;
+  // }
+
+  void initValues(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
     _screenWidth = _mediaQueryData.size.width;
     _screenHeight = _mediaQueryData.size.height;

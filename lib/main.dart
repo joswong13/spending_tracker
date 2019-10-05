@@ -7,6 +7,8 @@ import './Core/Constants/ColorPalette.dart';
 import './UI/Views/HomeView/HomeView.dart';
 
 void main() {
+  //sets fullscreen
+  //SystemChrome.setEnabledSystemUIOverlays([]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: greyDraculaOrchid, //top bar color
     statusBarIconBrightness: Brightness.light, //top bar icons
