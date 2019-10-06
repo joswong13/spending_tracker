@@ -2,6 +2,7 @@ import 'package:first_flutter/Core/ViewModels/MonthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Views/CategoryTransactionView/CategoryTransactionView.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class CategoryCard extends StatelessWidget {
   final String _category;
@@ -47,9 +48,10 @@ class CategoryCard extends StatelessWidget {
                 _category,
                 style: TextStyle(fontSize: 24),
               ),
-              Text(
+              AutoSizeText(
                 "\$" + _amount.toString(),
                 style: TextStyle(fontSize: 24),
+                maxLines: 1,
               ),
             ],
           ),
