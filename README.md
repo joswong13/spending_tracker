@@ -14,6 +14,8 @@ Currently using SQFLite to store the transaction as one big table of transaction
 
 ## Completed
 
+### Added
+
 - [x] added a way to view the category totals
 - [x] added a way to click into each category
 - [x] added const to widgets that will never be re-rendered when ChangeNotifier fires (eg. Text widgets and TextStyle widgets)
@@ -25,6 +27,8 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] added dismissible to weeklyView to allow swiping to change weeks
 - [x] added chevrons to dismissible (background and secondary background)
 
+### Changed
+
 - [x] changed monthly calendar view to something more representative of the month (6 weeks)
 - [x] changed category picker from dropdown to a dialog pop up
 - [x] changed bottom nav bar icons
@@ -32,11 +36,15 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] changed weekday list functions to const
 - [x] refactored models to singleton and added static methods
 
+### Improved
+
 - [x] improved codebase logistics (remove functions out of AddExpenseView to its own dart file)
 - [x] improved flow of app
 - [x] improved readability in month view
 - [x] improved navigation between widgets
 - [x] improved speed of calculating monthly data table object by adding compute (splitting to seperate thread)
+
+### Removed
 
 - [x] removed unused classes/files
 - [x] removed top appbar
