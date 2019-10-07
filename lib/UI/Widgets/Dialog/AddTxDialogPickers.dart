@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../Core/Constants/ColorPalette.dart';
 
 enum Category { GAS, FOOD, GROCCERIES, RECURRING, CLOTHES, ENTERTAINMENT, TRANSPORTATION, MISC }
 
@@ -6,7 +7,7 @@ Future<DateTime> presentDatePicker(BuildContext context, DateTime selectedDate) 
   DateTime datePicked = await showDatePicker(
     context: context,
     initialDate: selectedDate == null ? DateTime.now() : selectedDate,
-    firstDate: DateTime(2019),
+    firstDate: DateTime(2018),
     lastDate: DateTime.now(),
   );
   if (datePicked == null) {
@@ -22,52 +23,55 @@ Future<String> categoryDialog(BuildContext context) async {
       builder: (BuildContext context) {
         return SimpleDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-          title: Text('Select Category'),
+          title: const Text('Select Category'),
           children: <Widget>[
+            Divider(
+              color: greyCityLights,
+            ),
             SimpleDialogOption(
-              child: Text('Clothes'),
+              child: const Text('Clothes'),
               onPressed: () {
                 Navigator.pop(context, Category.CLOTHES);
               },
             ),
             SimpleDialogOption(
-              child: Text('Entertainment'),
+              child: const Text('Entertainment'),
               onPressed: () {
                 Navigator.pop(context, Category.ENTERTAINMENT);
               },
             ),
             SimpleDialogOption(
-              child: Text('Food'),
+              child: const Text('Food'),
               onPressed: () {
                 Navigator.pop(context, Category.FOOD);
               },
             ),
             SimpleDialogOption(
-              child: Text('Gas'),
+              child: const Text('Gas'),
               onPressed: () {
                 Navigator.pop(context, Category.GAS);
               },
             ),
             SimpleDialogOption(
-              child: Text('Grocceries'),
+              child: const Text('Grocceries'),
               onPressed: () {
                 Navigator.pop(context, Category.GROCCERIES);
               },
             ),
             SimpleDialogOption(
-              child: Text('Misc.'),
+              child: const Text('Misc.'),
               onPressed: () {
                 Navigator.pop(context, Category.MISC);
               },
             ),
             SimpleDialogOption(
-              child: Text('Recurring'),
+              child: const Text('Recurring'),
               onPressed: () {
                 Navigator.pop(context, Category.RECURRING);
               },
             ),
             SimpleDialogOption(
-              child: Text('Transportation'),
+              child: const Text('Transportation'),
               onPressed: () {
                 Navigator.pop(context, Category.TRANSPORTATION);
               },

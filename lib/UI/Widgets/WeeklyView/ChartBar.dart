@@ -27,7 +27,7 @@ class ChartBar extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  border: Border.all(color: ColorPalette.greenLightGreenishBlue, width: 3),
+                  border: Border.all(color: greenLightGreenishBlue, width: 3),
                   //color: barBgColor(),
                   // gradient: LinearGradient(
                   //     begin: Alignment.bottomRight,
@@ -42,7 +42,7 @@ class ChartBar extends StatelessWidget {
                 heightFactor: _percWeeklyTotal,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: ColorPalette.greenLightGreenishBlue,
+                    color: greenLightGreenishBlue,
                     // gradient: LinearGradient(
                     //     begin: Alignment.bottomRight,
                     //     end: Alignment.topLeft,

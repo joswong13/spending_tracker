@@ -5,6 +5,7 @@ class UserTransaction {
   int _date;
   String _category;
   String _desc;
+  int _uploaded;
 
   UserTransaction();
 
@@ -15,10 +16,19 @@ class UserTransaction {
     this._date = data["date"];
     this._category = data["category"];
     this._desc = data["desc"];
+    this._uploaded = data["uploaded"];
   }
 
   Map<String, dynamic> toMap() {
-    return {"id": id, "name": name, "amount": amount, "date": date, "category": category, "desc": desc};
+    return {
+      "id": id,
+      "name": name,
+      "amount": amount,
+      "date": date,
+      "category": category,
+      "desc": desc,
+      "uploaded": uploaded
+    };
   }
 
   set id(id) {
@@ -45,6 +55,10 @@ class UserTransaction {
     _desc = desc;
   }
 
+  set uploaded(uploaded) {
+    _uploaded = uploaded;
+  }
+
   int get id {
     return _id;
   }
@@ -69,8 +83,12 @@ class UserTransaction {
     return _desc;
   }
 
+  int get uploaded {
+    return _uploaded;
+  }
+
   @override
   String toString() {
-    return "{'id': $_id, 'name':$_name, 'amount':$_amount, '_date':$_date, 'category': $_category, 'desc':$_desc}";
+    return "{'id': $_id, 'name':$_name, 'amount':$_amount, '_date':$_date, 'category': $_category, 'desc':$_desc, 'uploaded':$_uploaded}";
   }
 }
