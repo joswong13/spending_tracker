@@ -16,6 +16,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   final nameController = TextEditingController();
   final descController = TextEditingController();
   final amountController = TextEditingController();
+  final SizeConfig sizeConfig = SizeConfig();
   String _errorMsg;
   DateTime _selectedDate;
   String _category = "Food";
@@ -138,7 +139,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   @override
   Widget build(BuildContext context) {
     final monthData = Provider.of<MonthProvider>(context);
-    final SizeConfig sizeConfig = SizeConfig();
+
     double regularFontSize = sizeConfig.blockSizeVertical * 2.63;
 
     return Scaffold(
@@ -152,7 +153,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 Text(
                   "Add Transaction",
                   style: TextStyle(
-                      fontSize: sizeConfig.blockSizeVertical * 4.1, color: greyCityLights, fontWeight: FontWeight.w600),
+                      fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
                   style: const TextStyle(color: Colors.green),

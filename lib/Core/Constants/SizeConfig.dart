@@ -6,6 +6,7 @@ class SizeConfig {
   static double _screenHeight;
   static double _blockSizeHorizontal;
   static double _blockSizeVertical;
+  static double _topTextHeight28;
 
   // SizeConfig(BuildContext context) {
   //   _mediaQueryData = MediaQuery.of(context);
@@ -21,6 +22,7 @@ class SizeConfig {
     _screenHeight = _mediaQueryData.size.height;
     _blockSizeHorizontal = _screenWidth / 100;
     _blockSizeVertical = _screenHeight / 100;
+    _topTextHeight28 = _blockSizeVertical * 4.1;
   }
 
   double get blockSizeHorizontal {
@@ -29,5 +31,10 @@ class SizeConfig {
 
   double get blockSizeVertical {
     return _blockSizeVertical;
+  }
+
+  ///Font size 28 eqv. on nexus 5
+  double get topTextHeight28 {
+    return _topTextHeight28;
   }
 }

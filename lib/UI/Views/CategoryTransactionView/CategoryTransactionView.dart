@@ -1,4 +1,5 @@
 import 'package:first_flutter/Core/Constants/ColorPalette.dart';
+import 'package:first_flutter/Core/Constants/SizeConfig.dart';
 import 'package:first_flutter/Core/Models/UserTransaction.dart';
 import 'package:first_flutter/Core/ViewModels/MonthProvider.dart';
 import 'package:first_flutter/UI/Widgets/MonthlyOverview/CategoryTxList.dart';
@@ -9,6 +10,7 @@ class CategoryTransactionView extends StatelessWidget {
   final String _categoryType;
   final double _amount;
   final List<UserTransaction> _categoryList;
+  final SizeConfig sizeConfig = SizeConfig();
 
   ///The view of listing out all the category transactions given the category type, amount, and list of transactions.
   CategoryTransactionView(this._categoryList, this._categoryType, this._amount);
@@ -23,7 +25,8 @@ class CategoryTransactionView extends StatelessWidget {
             children: <Widget>[
               Text(
                 _categoryType,
-                style: TextStyle(fontSize: 28, color: greyCityLights, fontWeight: FontWeight.w600),
+                style:
+                    TextStyle(fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
               ),
               Text(
                 "\$" + _amount.toString(),
