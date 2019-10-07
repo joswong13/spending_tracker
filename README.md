@@ -35,6 +35,7 @@ Currently using SQFLite to store the transaction as one big table of transaction
 - [x] changed color constants to const variables
 - [x] changed weekday list functions to const
 - [x] refactored models to singleton and added static methods
+- [x] changed category transaction view into a listview.builder
 
 ### Improved
 

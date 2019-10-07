@@ -4,11 +4,11 @@ import 'package:first_flutter/UI/Views/EditDeleteView/EditDeleteTransactionView.
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CategoryTransactionList extends StatelessWidget {
+class CategoryTransactionItem extends StatelessWidget {
   final UserTransaction _txData;
 
   /// Initialize constructor with UserTransaction object
-  CategoryTransactionList(this._txData);
+  CategoryTransactionItem(this._txData);
 
   @override
   Widget build(BuildContext context) {
