@@ -7,8 +7,10 @@ import './Core/Constants/ColorPalette.dart';
 import './UI/Views/HomeView/HomeView.dart';
 
 void main() {
+  //sets fullscreen
+  //SystemChrome.setEnabledSystemUIOverlays([]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: greyDraculaOrchid(), //top bar color
+    statusBarColor: greyDraculaOrchid, //top bar color
     statusBarIconBrightness: Brightness.light, //top bar icons
     systemNavigationBarColor: Colors.black, //bottom bar color
     systemNavigationBarIconBrightness: Brightness.light, //bottom bar icons
@@ -26,10 +28,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          scaffoldBackgroundColor: greyDraculaOrchid(),
-          buttonColor: greenLightGreenishBlue(),
+          scaffoldBackgroundColor: greyDraculaOrchid,
+          buttonColor: greenLightGreenishBlue,
           brightness: Brightness.dark,
-          primaryColor: greenLightGreenishBlue(),
+          primaryColor: greenLightGreenishBlue,
         ),
         home: HomeView(),
         //routes: <String, WidgetBuilder>{'/addTransaction': (BuildContext context) => TransactionScreen()},

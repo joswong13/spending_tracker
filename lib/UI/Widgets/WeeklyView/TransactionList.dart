@@ -12,6 +12,10 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+      ),
       margin: EdgeInsets.fromLTRB(10, 5, 10, 10),
       child: Column(
         children: <Widget>[
@@ -22,16 +26,16 @@ class TransactionList extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "${_data["weekdayLong"]}",
-                    style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 28, color: greyCityLights, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
                   "\$ ${_data["dailyTotal"]}",
-                  style: TextStyle(fontSize: 18, color: greyCityLights(), fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, color: greenLightGreenishBlue, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   " (${_data["percWeeklySpending"]}%)",
-                  style: TextStyle(fontSize: 18, color: purpleShyMoment(), fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, color: purpleShyMoment, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

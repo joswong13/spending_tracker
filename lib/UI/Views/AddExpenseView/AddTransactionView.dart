@@ -1,8 +1,9 @@
+import 'package:first_flutter/Core/Constants/SizeConfig.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../Core/ViewModels/MonthProvider.dart';
-import '../../Widgets/AddExpenseView/DialogPickers.dart';
+import '../../Widgets/Dialog/AddTxDialogPickers.dart';
 import '../../../Core/Constants/ColorPalette.dart';
 
 class TransactionScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
   final nameController = TextEditingController();
   final descController = TextEditingController();
   final amountController = TextEditingController();
+  final SizeConfig sizeConfig = SizeConfig();
   String _errorMsg;
   DateTime _selectedDate;
   String _category = "Food";
@@ -138,6 +140,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     final monthData = Provider.of<MonthProvider>(context);
 
+    double regularFontSize = sizeConfig.blockSizeVertical * 2.63;
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -148,23 +152,24 @@ class _TransactionScreenState extends State<TransactionScreen> {
               children: <Widget>[
                 Text(
                   "Add Transaction",
-                  style: TextStyle(fontSize: 28, color: greyCityLights(), fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                      fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Name', 'Enter transaction name', 0),
                   controller: nameController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Description', '(Optional) Enter description', 1),
                   controller: descController,
                   textCapitalization: TextCapitalization.words,
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
-                  style: TextStyle(color: Colors.green),
+                  style: const TextStyle(color: Colors.green),
                   decoration: _textDecoration('Amount', 'Enter the amount (eg. 0.00)', 2),
                   controller: amountController,
                 ),
@@ -175,7 +180,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                       Expanded(
                         child: Text(
                           'Category:',
-                          style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 18),
+                          style: TextStyle(color: Theme.of(context).primaryColor, fontSize: regularFontSize),
                         ),
                       ),
                       RaisedButton(
@@ -183,6 +188,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         child: Text(
                           _category,
                           style: TextStyle(color: Colors.black),
+                        ),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
                         ),
                         onPressed: () {
                           categoryDialog(context).then((String resp) {
@@ -202,7 +212,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
                           _selectedDate == null ? 'No Date Chosen' : DateFormat.yMd().format(_selectedDate),
                           style: TextStyle(
                             color: Theme.of(context).primaryColor,
-                            fontSize: 18,
+                            fontSize: regularFontSize,
                           ),
                         ),
                       ),
@@ -211,6 +221,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                         child: Text(
                           'Choose Date',
                           style: TextStyle(color: Colors.black),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(30),
+                          ),
                         ),
                         onPressed: () {
                           presentDatePicker(context, _selectedDate).then((DateTime resp) {
@@ -223,50 +238,53 @@ class _TransactionScreenState extends State<TransactionScreen> {
                     ],
                   ),
                 ),
-                RaisedButton(
-                  color: Theme.of(context).primaryColor,
-                  child: Text(
-                    'Submit Transaction',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onPressed: () {
-                    bool checkValue = _checkValidFields();
-                    if (checkValue) {
-                      monthData
-                          .insertUserTransaction(_trimText(nameController.text), double.parse(amountController.text),
-                              _trimText(descController.text), _selectedDate, _category)
-                          .then((resp) {
-                        _afterSubmit();
-                      });
-                    }
-                  },
-                ),
-                _transactionAdded
-                    ? RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          'Done',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () async {
-                          await monthData.refreshTransactions();
-                          Navigator.pop(context);
-                        },
-                      )
-                    : RaisedButton(
-                        color: Theme.of(context).primaryColor,
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        onPressed: () async {
-                          Navigator.pop(context);
-                        },
-                      ),
                 _errorMessage()
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            FloatingActionButton.extended(
+              heroTag: "backButton",
+              icon: const Icon(Icons.arrow_back),
+              label: _transactionAdded ? Text("Done") : Text("Back"),
+              onPressed: () async {
+                if (_transactionAdded) {
+                  await monthData.refreshTransactions();
+                  Navigator.pop(context);
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+            ),
+            FloatingActionButton.extended(
+              heroTag: "addButton",
+              icon: const Icon(Icons.add_circle_outline),
+              label: const Text("Add"),
+              onPressed: () {
+                bool checkValue = _checkValidFields();
+                if (checkValue) {
+                  double amountDouble = double.parse(amountController.text);
+                  monthData
+                      .insertUserTransaction(
+                          _trimText(nameController.text),
+                          double.parse(amountDouble.toStringAsFixed(2)),
+                          _trimText(descController.text),
+                          _selectedDate,
+                          _category)
+                      .then((resp) {
+                    _afterSubmit();
+                  });
+                }
+              },
+            ),
+          ],
         ),
       ),
     );

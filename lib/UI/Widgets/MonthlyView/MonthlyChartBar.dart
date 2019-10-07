@@ -10,55 +10,59 @@ class MonthlyChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double textHeight = _boxHeight * 0.45;
+    final double marginNum = _boxHeight * 0.068;
+
     return Container(
-      height: _boxHeight * 8.8,
-      //margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-      child: Container(
-        margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
-        child: Stack(
-          children: <Widget>[
-            Container(
+      height: _boxHeight * 0.6,
+      margin: EdgeInsets.all(marginNum),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              border: Border.all(color: greenLightGreenishBlue, width: 3),
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+          FractionallySizedBox(
+            widthFactor: _monthlyTotal > 0.0 ? _weeklyTotal / _monthlyTotal : 0.0,
+            child: Container(
               decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(color: greenLightGreenishBlue(), width: 3),
-                //color: barBgColor(),
-                borderRadius: BorderRadius.circular(5),
+                color: greenLightGreenishBlue,
+                borderRadius: BorderRadius.circular(30),
               ),
             ),
-            FractionallySizedBox(
-              widthFactor: _monthlyTotal > 0.0 ? _weeklyTotal / _monthlyTotal : 0.0,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: greenLightGreenishBlue(),
-                  borderRadius: BorderRadius.circular(5),
+          ),
+          Center(
+            child: Stack(
+              children: <Widget>[
+                // Stroked text as border.
+                Text(
+                  "\$$_weeklyTotal",
+                  style: TextStyle(
+                    fontSize: textHeight,
+                    fontWeight: FontWeight.bold,
+                    foreground: Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 4
+                      ..color = greyDraculaOrchid,
+                  ),
                 ),
-              ),
+                // Solid text as fill.
+                Text(
+                  "\$$_weeklyTotal",
+                  style: TextStyle(
+                    color: greyCityLights,
+                    fontSize: textHeight,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            Center(
-              child: Text(
-                "\$$_weeklyTotal",
-                style: TextStyle(
-                  color: greyCityLights(),
-                  fontSize: 38,
-                  fontWeight: FontWeight.bold,
-                ),
-                // style: TextStyle(
-                //   color: greyDraculaOrchid(),
-                //   fontSize: 38,
-                //   fontWeight: FontWeight.bold,
-                //   shadows: <Shadow>[
-                //     Shadow(
-                //       offset: Offset(2, 2),
-                //       blurRadius: 4.0,
-                //       color: greyCityLights(),
-                //     ),
-                //   ],
-                // ),
-              ),
-            )
-          ],
-          overflow: Overflow.clip,
-        ),
+          )
+        ],
+        overflow: Overflow.clip,
       ),
     );
   }
@@ -102,3 +106,16 @@ class MonthlyChartBar extends StatelessWidget {
 //         ),
 //       ],
 //     );
+
+// style: TextStyle(
+//   color: greyDraculaOrchid(),
+//   fontSize: 38,
+//   fontWeight: FontWeight.bold,
+//   shadows: <Shadow>[
+//     Shadow(
+//       offset: Offset(2, 2),
+//       blurRadius: 4.0,
+//       color: greyCityLights(),
+//     ),
+//   ],
+// ),
