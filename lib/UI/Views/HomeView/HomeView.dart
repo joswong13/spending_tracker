@@ -35,7 +35,6 @@ class _HomeViewState extends State<HomeView> {
 
     //BottomNavBar is always 8% of usable screen
     final bottomNavBarHieght = sizeConfig.blockSizeVertical * 8;
-    final topIconSize = sizeConfig.blockSizeVertical * 4.1;
 
     return Scaffold(
       body: SafeArea(
@@ -49,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                 children: <Widget>[
                   IconButton(
                     icon: const Icon(Icons.refresh),
-                    iconSize: topIconSize,
+                    iconSize: sizeConfig.topHeight28,
                     color: Theme.of(context).primaryColor,
                     tooltip: "Reset",
                     onPressed: () {
@@ -58,7 +57,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.date_range),
-                    iconSize: topIconSize,
+                    iconSize: sizeConfig.topHeight28,
                     color: Theme.of(context).primaryColor,
                     tooltip: "Pick date",
                     onPressed: () async {

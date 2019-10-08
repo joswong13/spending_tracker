@@ -152,8 +152,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
               children: <Widget>[
                 Text(
                   "Add Transaction",
-                  style: TextStyle(
-                      fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+                  style:
+                      TextStyle(fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                 ),
                 TextField(
                   style: const TextStyle(color: Colors.green),

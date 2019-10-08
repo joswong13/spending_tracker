@@ -57,8 +57,8 @@ class MonthlyView extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     DateFormat.yMMM().format(monthData.date),
-                    style: TextStyle(
-                        fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+                    style:
+                        TextStyle(fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                   ),
                   MonthlyTableView(),
                 ],

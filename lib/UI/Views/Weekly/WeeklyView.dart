@@ -58,7 +58,7 @@ class WeeklyView extends StatelessWidget {
                 children: <Widget>[
                   Text(
                       "${DateFormat.MMMd().format(displayWeekRange[0])} - ${DateFormat.MMMd().format(displayWeekRange[1])}",
-                      style: TextStyle(fontSize: sizeConfig.topTextHeight28)),
+                      style: TextStyle(fontSize: sizeConfig.topHeight28)),
                   Chart(),
                   WeeklyTransactionList(),
                 ],

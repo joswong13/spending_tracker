@@ -18,8 +18,7 @@ class CategoryOverviewCard extends StatelessWidget {
           children: <Widget>[
             Text(
               "Six Week Totals",
-              style:
-                  TextStyle(fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+              style: TextStyle(fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
             ),
             Expanded(
               child: Row(

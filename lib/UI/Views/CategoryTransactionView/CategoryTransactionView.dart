@@ -31,7 +31,7 @@ class CategoryTransactionView extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: IconButton(
                         icon: const Icon(Icons.arrow_back),
-                        iconSize: sizeConfig.topTextHeight28,
+                        iconSize: sizeConfig.topHeight28,
                         color: Theme.of(context).primaryColor,
                         tooltip: "Back",
                         onPressed: () {
@@ -47,12 +47,12 @@ class CategoryTransactionView extends StatelessWidget {
                         Text(
                           _categoryType,
                           style: TextStyle(
-                              fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+                              fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                         ),
                         Text(
                           "\$" + _amount.toString(),
                           style: TextStyle(
-                              fontSize: sizeConfig.topTextHeight28,
+                              fontSize: sizeConfig.topHeight28,
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w600),
                         ),
