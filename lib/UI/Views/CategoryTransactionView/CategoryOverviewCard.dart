@@ -25,13 +25,15 @@ class CategoryOverviewCard extends StatelessWidget {
                 children: <Widget>[
                   CategoryCard(
                     categoryList[0]["category"],
-                    categoryList[0]["amount"],
+                    0,
+                    //categoryList[0]["amount"],
                     redPinkGlamor,
                     tealRobinsEgg,
                   ),
                   CategoryCard(
                     categoryList[1]["category"],
-                    categoryList[1]["amount"],
+                    1,
+                    //categoryList[1]["amount"],
                     purpleExodusFruit,
                     pinkPrunusAvium,
                   ),
@@ -43,13 +45,15 @@ class CategoryOverviewCard extends StatelessWidget {
                 children: <Widget>[
                   CategoryCard(
                     categoryList[2]["category"],
-                    categoryList[2]["amount"],
+                    2,
+                    //categoryList[2]["amount"],
                     greenMintLeaf,
                     blueElectron,
                   ),
                   CategoryCard(
                     categoryList[3]["category"],
-                    categoryList[3]["amount"],
+                    3,
+                    //categoryList[3]["amount"],
                     redChiGong,
                     orangeville,
                   ),
@@ -61,13 +65,15 @@ class CategoryOverviewCard extends StatelessWidget {
                 children: <Widget>[
                   CategoryCard(
                     categoryList[4]["category"],
-                    categoryList[4]["amount"],
+                    4,
+                    //categoryList[4]["amount"],
                     yellowBrightYarrow,
                     orangeville,
                   ),
                   CategoryCard(
                     categoryList[5]["category"],
-                    categoryList[5]["amount"],
+                    5,
+                    //categoryList[5]["amount"],
                     purpleExodusFruit,
                     blueElectron,
                   ),
@@ -79,13 +85,15 @@ class CategoryOverviewCard extends StatelessWidget {
                 children: <Widget>[
                   CategoryCard(
                     categoryList[6]["category"],
-                    categoryList[6]["amount"],
+                    6,
+                    //categoryList[6]["amount"],
                     redChiGong,
                     pinkPrunusAvium,
                   ),
                   CategoryCard(
                     categoryList[7]["category"],
-                    categoryList[7]["amount"],
+                    7,
+                    //categoryList[7]["amount"],
                     blueGreyGoodSamaritan,
                     tealRobinsEgg,
                   ),

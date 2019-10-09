@@ -45,13 +45,13 @@ class MonthProvider with ChangeNotifier {
   ///Used for Reset button and Changing months by swiping left and right.
   Future<void> _changeDateAndQuery(DateTime date) async {
     if (date.year != monthInstance.date.year || date.month != monthInstance.date.month) {
-      print("[MonthProvider] - monthOrYearDiff called");
       _setBusy(true);
       setDate(date, monthInstance);
 
       //Query
       //Call build table fcn
       List<Map<String, dynamic>> listOfUserTx = await _getUserTransactionsBetween();
+
       Map<String, dynamic> temp = {
         "monthlyDateArray": monthInstance.monthlyDateArray,
         "tx": listOfUserTx,
@@ -153,16 +153,19 @@ class MonthProvider with ChangeNotifier {
     if (_categoryType != "") {
       getListOfCategoryTransactions();
     }
-
+    print(_categoryType);
     await compute(StaticMonthlyDataTable.calc, temp).then((resp) {
       dataTable = resp;
       _setBusy(false);
+      // List<List<Map<String, dynamic>>> temp = resp.monthlyDataTableObject;
+      // for (int i = 0; i < temp.length; i++) {
+      //   print(temp[i]);
+      // }
     });
   }
 
   ///Changes the current week index in the monthly object when clicking from MonthlyView.
   Future<void> setCurrentWeekIndexFromMonthlyView(DateTime date) async {
-    print("[MonthProvider] - setCurrentWeekFromMonthlyView called");
     _setBusy(true);
     setCurrentWeekIndex(date, monthInstance);
     _setBusy(false);
@@ -231,7 +234,7 @@ class MonthProvider with ChangeNotifier {
     return await databaseHelper.getCategoryList(beginningOfQuery, endOfQuery, category);
   }
 
-  ///Private function that is called when the Month object is refreshed.
+  ///Private function that grabs all the transactions between certain dates.
   Future<List<Map<String, dynamic>>> _getUserTransactionsBetween() async {
     int beginningOfQuery = monthInstance.beginningOfMonthlyDateArray.millisecondsSinceEpoch;
     int endOfQuery = monthInstance.endOfMonthlyDateArray.millisecondsSinceEpoch;

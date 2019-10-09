@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 
 class CategoryTransactionView extends StatelessWidget {
   final String _categoryType;
-  final double _amount;
+  final int _index;
   final List<UserTransaction> _categoryList;
   final SizeConfig sizeConfig = SizeConfig();
 
   ///The view of listing out all the category transactions given the category type, amount, and list of transactions.
-  CategoryTransactionView(this._categoryList, this._categoryType, this._amount);
+  CategoryTransactionView(this._categoryList, this._categoryType, this._index);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class CategoryTransactionView extends StatelessWidget {
                               fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
                         ),
                         Text(
-                          "\$" + _amount.toString(),
+                          "\$" + monthData.monthlyCategoryTotals[_index]["amount"].toString(),
                           style: TextStyle(
                               fontSize: sizeConfig.topHeight28,
                               color: Theme.of(context).primaryColor,
