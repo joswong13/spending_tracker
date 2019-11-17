@@ -21,5 +21,6 @@ Currently using SQFLite to store the transaction as one big table of transaction
 ### Weekly screen
 
 ![Weekly Screen](screenshots/2.WeeklyScreen.jpg)
+<img src="screenshots/2.WeeklyScreen.jpg"  width="800" height="600">
 
 > This screen shows the seven days of the week on a bar graph with the transactions that occured on each day at the bottom the screen. Each day also shoes the amount spent that day and the daily percentage of that take (Daily Percentage = DailyTotal/WeeklyTotal).
