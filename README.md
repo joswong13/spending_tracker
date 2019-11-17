@@ -16,14 +16,10 @@ Currently using SQFLite to store the transaction as one big table of transaction
 
 ![Main Screen](screenshots/1.MainScreen.jpg)
 
-```
-This screen shows six weeks starting from the beginning of the month to the last of the month. Users can click on each card to go the weekly view.
-```
+> This screen shows six weeks starting from the beginning of the month to the last of the month. Users can click on each card to go the weekly view.
 
 ### Weekly screen
 
 ![Weekly Screen](screenshots/2.WeeklyScreen.jpg)
 
-```
-This screen shows the seven days of the week on a bar graph with the transactions that occured on each day at the bottom the screen. Each day also shoes the amount spent that day and the daily percentage of that take (Daily Percentage = DailyTotal/WeeklyTotal).
-```
+> This screen shows the seven days of the week on a bar graph with the transactions that occured on each day at the bottom the screen. Each day also shoes the amount spent that day and the daily percentage of that take (Daily Percentage = DailyTotal/WeeklyTotal).
