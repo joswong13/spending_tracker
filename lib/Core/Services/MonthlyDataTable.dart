@@ -4,18 +4,18 @@ import '../Constants/WeekdayConstants.dart';
 import '../Models/UserTransaction.dart';
 
 class StaticMonthlyDataTable {
-  static MonthlyDataTable temp = MonthlyDataTable.getInstance;
+  //static MonthlyDataTable temp = MonthlyDataTable.getInstance;
 
   static Future<MonthlyDataTable> calc(Map<String, dynamic> computeMap) async {
-    _buildMonthlyTable(computeMap["monthlyDateArray"], computeMap["tx"], computeMap["month"], temp);
-    return temp;
+    return _buildMonthlyTable(computeMap["monthlyDateArray"], computeMap["tx"], computeMap["month"]);
+    //return temp;
   }
 }
 //-------------------------Private functions---------------------------------------------------------------------------
 
 ///Given the monthly date array and the tx list, builds the monthly view array.
-MonthlyDataTable _buildMonthlyTable(List<List<DateTime>> monthlyDateArray, List<Map<String, dynamic>> tx, int month,
-    MonthlyDataTable monthlyDataTable) {
+MonthlyDataTable _buildMonthlyTable(List<List<DateTime>> monthlyDateArray, List<Map<String, dynamic>> tx, int month) {
+  MonthlyDataTable monthlyDataTable = MonthlyDataTable.getInstance;
   //init category map
   monthlyDataTable.monthlyCategoryTotals = _initMonthlyCategoryTotalsMap();
 
@@ -128,6 +128,7 @@ Map<DateTime, dynamic> _createTransactionsMapFromList(
       //ensure the double is 2 decimal places
       double dailyTotalAmount = double.parse(dailyTotal.toStringAsFixed(2));
       Map<String, dynamic> dailyMap = {"transactions": listOfDailyTx, "dailyTotal": dailyTotalAmount};
+
       txMap[currentTxDate] = dailyMap;
 
       currentTxDate = tempTxDate;

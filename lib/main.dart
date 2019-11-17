@@ -7,7 +7,7 @@ import './Core/Constants/ColorPalette.dart';
 import './UI/Views/HomeView/HomeView.dart';
 
 void main() {
-  //sets fullscreen
+  //sets fullscreen (without bottom nav android nav bar)
   //SystemChrome.setEnabledSystemUIOverlays([]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: greyDraculaOrchid, //top bar color
@@ -15,7 +15,9 @@ void main() {
     systemNavigationBarColor: Colors.black, //bottom bar color
     systemNavigationBarIconBrightness: Brightness.light, //bottom bar icons
   ));
-  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    runApp(new MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {

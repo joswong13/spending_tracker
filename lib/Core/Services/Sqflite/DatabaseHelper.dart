@@ -87,7 +87,8 @@ class DataBaseHelper {
     print("[DatabaseHelper] - getUserTransactionsBetween dates");
     final Database db = await database;
 
-    return await db.query('userTransaction', where: "date >= ? AND date <= ?", whereArgs: [startOfMonth, endOfMonth]);
+    return await db.query('userTransaction',
+        where: "date >= ? AND date <= ?", whereArgs: [startOfMonth, endOfMonth], orderBy: "date ASC");
   }
 
   /// Gets all transactions from a particular category and date.
@@ -96,6 +97,8 @@ class DataBaseHelper {
     final Database db = await database;
 
     return await db.query('userTransaction',
-        where: "date >= ? AND date <= ? AND category = ?", whereArgs: [startOfMonth, endOfMonth, category]);
+        where: "date >= ? AND date <= ? AND category = ?",
+        whereArgs: [startOfMonth, endOfMonth, category],
+        orderBy: "date ASC");
   }
 }

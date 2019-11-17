@@ -6,13 +6,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class CategoryCard extends StatelessWidget {
   final String _category;
-  final double _amount;
+  final int _index;
   final Color _color1;
   final Color _color2;
 
   ///The widget that displays the category, amount and also is rendered with a gradient given 2 colors.
   ///Clicking on this widget will use Navigator.push to go to the CategoryTransactionView.dart.
-  CategoryCard(this._category, this._amount, this._color1, this._color2);
+  CategoryCard(this._category, this._index, this._color1, this._color2);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CategoryCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (_) {
-                return CategoryTransactionView(monthData.categoryUserTransactionList, _category, _amount);
+                return CategoryTransactionView(monthData.categoryUserTransactionList, _category, _index);
               }),
             );
           });
@@ -49,7 +49,7 @@ class CategoryCard extends StatelessWidget {
                 style: TextStyle(fontSize: 24),
               ),
               AutoSizeText(
-                "\$" + _amount.toString(),
+                "\$" + monthData.monthlyCategoryTotals[_index]["amount"].toString(),
                 style: TextStyle(fontSize: 24),
                 maxLines: 1,
               ),

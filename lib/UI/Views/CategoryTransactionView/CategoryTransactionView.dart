@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 
 class CategoryTransactionView extends StatelessWidget {
   final String _categoryType;
-  final double _amount;
+  final int _index;
   final List<UserTransaction> _categoryList;
   final SizeConfig sizeConfig = SizeConfig();
 
   ///The view of listing out all the category transactions given the category type, amount, and list of transactions.
-  CategoryTransactionView(this._categoryList, this._categoryType, this._amount);
+  CategoryTransactionView(this._categoryList, this._categoryType, this._index);
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +23,61 @@ class CategoryTransactionView extends StatelessWidget {
         child: Center(
           child: Column(
             children: <Widget>[
-              Text(
-                _categoryType,
-                style:
-                    TextStyle(fontSize: sizeConfig.topTextHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+              Stack(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        iconSize: sizeConfig.topHeight28,
+                        color: Theme.of(context).primaryColor,
+                        tooltip: "Back",
+                        onPressed: () {
+                          monthData.categoryType = "";
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          _categoryType,
+                          style: TextStyle(
+                              fontSize: sizeConfig.topHeight28, color: greyCityLights, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "\$" + monthData.monthlyCategoryTotals[_index]["amount"].toString(),
+                          style: TextStyle(
+                              fontSize: sizeConfig.topHeight28,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                "\$" + _amount.toString(),
-                style: TextStyle(fontSize: 28, color: greenLightGreenishBlue, fontWeight: FontWeight.w600),
-              ),
-              if (_categoryList.isEmpty)
-                Text(
-                  "No transactions for " + _categoryType,
-                  style: TextStyle(fontSize: 22, color: greyCityLights, fontWeight: FontWeight.w500),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(10, 5, 10, 0),
+                  child: _categoryList.isEmpty
+                      ? Text(
+                          "No transactions for " + _categoryType,
+                          style: TextStyle(fontSize: 22, color: greyCityLights, fontWeight: FontWeight.w500),
+                        )
+                      : ListView.builder(
+                          itemCount: _categoryList.length,
+                          itemBuilder: (BuildContext ctx, int index) {
+                            return CategoryTransactionItem(_categoryList[index]);
+                          },
+                        ),
                 ),
-              if (_categoryList.isNotEmpty)
-                ..._categoryList.map((eachItem) {
-                  return CategoryTransactionList(eachItem);
-                }).toList(),
+              ),
             ],
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: FloatingActionButton.extended(
-            icon: Icon(Icons.arrow_back),
-            label: Text("Back"),
-            onPressed: () {
-              monthData.categoryType = "";
-              Navigator.pop(context);
-            },
           ),
         ),
       ),
