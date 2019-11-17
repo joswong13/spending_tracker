@@ -14,4 +14,4 @@ Currently using SQFLite to store the transaction as one big table of transaction
 
 ### Main screen
 
-![Main Screen](screenshots/1.MainScreen.jpg)
+![Main Screen](screenshots/1.MainScreen.jpg){:height="50%" width="50%"}
