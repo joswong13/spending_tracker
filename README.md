@@ -14,38 +14,32 @@ Currently using SQFLite to store the transaction as one big table of transaction
 
 ### Main screen
 
-![Main Screen](screenshots/1.MainScreen.jpg)
 <img src="screenshots/1.MainScreen.jpg"  width=50% height=50% >
 
 > This screen shows six weeks starting from the beginning of the month to the last of the month. Users can click on each card to go the weekly view.
 
 ### Weekly screen
 
-![Weekly Screen](screenshots/2.WeeklyScreen.jpg)
 <img src="screenshots/2.WeeklyScreen.jpg"  width=50% height=50% >
 
 > This screen shows the seven days of the week on a bar graph with the transactions that occured on each day at the bottom the screen. Each day also shoes the amount spent that day and the daily percentage of that take (Daily Percentage = DailyTotal/WeeklyTotal).
 
 ### Category Screen
 
-![Category Screen](screenshots/3.AllCategoryScreen.jpg)
 <img src="screenshots/3.AllCategoryScreen.jpg"  width=50% height=50% >
 
 > This screen shows all eight preset categories which allows users to click to show the current category screen.
 
 ### Current Category Screen
 
-![Current Category Screen](screenshots/5.CurrentCategory.jpg)
 <img src="screenshots/5.CurrentCategory.jpg"  width=50% height=50% >
 
 > This screen shows all transactions for a particular category that has been added by the user for the selected month.
 
 ### Add Transaction
 
-![Add Transaction Screen](screenshots/4a.AddTransaction.jpg)
 <img src="screenshots/4a.AddTransaction.jpg"  width=50% height=50% >
 
 ### Edit Transaction
 
-![Edit Transaction Screen](screenshots/4b.EditTransaction.jpg)
 <img src="screenshots/4b.EditTransaction.jpg"  width=50% height=50% >
